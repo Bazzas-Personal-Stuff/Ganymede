@@ -60,6 +60,7 @@
       <PreprocessorDefinitions>GNM_PLATFORM_WINDOWS;GANYMEDE_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Ganymede\vendor\spdlog\include;%(AdditionalIncludeDirectories);$(_ZVcpkgCurrentInstalledDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -75,6 +76,7 @@
       <PreprocessorDefinitions>GNM_PLATFORM_WINDOWS;GANYMEDE_BUILD_DLL;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Ganymede\vendor\spdlog\include;%(AdditionalIncludeDirectories);$(_ZVcpkgCurrentInstalledDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,12 +160,14 @@
       <AdditionalIncludeDirectories>;C:\Dev\Libraries\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="src\Ganymede\Core.cpp" />
+    <ClCompile Include="src\Ganymede\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Ganymede\Application.h" />
     <ClInclude Include="src\Ganymede\Core.h" />
     <ClInclude Include="src\Ganymede.h" />
     <ClInclude Include="src\Ganymede\EntryPoint.h" />
+    <ClInclude Include="src\Ganymede\Log.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

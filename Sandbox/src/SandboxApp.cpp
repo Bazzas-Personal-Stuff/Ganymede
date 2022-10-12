@@ -4,7 +4,7 @@
 class Sandbox : public Ganymede::Application {
 public:
     Sandbox() {
-        std::printf("Hello, world\n");
+        // GNM_INFO("Hello, world!");
     }
     ~Sandbox(){}
 };
