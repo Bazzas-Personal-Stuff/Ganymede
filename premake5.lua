@@ -24,7 +24,8 @@ project "Ganymede"
     }
 
     includedirs {
-        "Ganymede/vendor/spdlog/include"
+        "%{prj.name}/src",
+        "%{prj.name}/vendor/spdlog/include"
     }
 
     filter "system:windows"

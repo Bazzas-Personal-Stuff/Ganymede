@@ -4,6 +4,9 @@
     <Filter Include="Ganymede">
       <UniqueIdentifier>{EFE32836-DBB0-8341-04CA-71E9F0F5B8CF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ganymede\Events">
+      <UniqueIdentifier>{F3ECD675-5F78-443A-6889-C72ED493A03A}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Ganymede.h" />
@@ -15,6 +18,9 @@
     </ClInclude>
     <ClInclude Include="src\Ganymede\EntryPoint.h">
       <Filter>Ganymede</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Events\Event.h">
+      <Filter>Ganymede\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Ganymede\Log.h">
       <Filter>Ganymede</Filter>

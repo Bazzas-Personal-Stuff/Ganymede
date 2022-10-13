@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GNM_PLATFORM_WINDOWS;GNM_BUILD_DLL;GNM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -99,7 +99,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GNM_PLATFORM_WINDOWS;GNM_BUILD_DLL;GNM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -123,7 +123,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GNM_PLATFORM_WINDOWS;GNM_BUILD_DLL;GNM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -147,12 +147,18 @@
     <ClInclude Include="src\Ganymede\Application.h" />
     <ClInclude Include="src\Ganymede\Core.h" />
     <ClInclude Include="src\Ganymede\EntryPoint.h" />
+    <ClInclude Include="src\Ganymede\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\Ganymede\Events\Event.h" />
+    <ClInclude Include="src\Ganymede\Events\KeyEvent.h" />
+    <ClInclude Include="src\Ganymede\Events\MouseEvent.h" />
     <ClInclude Include="src\Ganymede\Log.h" />
+    <ClInclude Include="src\gnmpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ganymede\Application.cpp" />
     <ClCompile Include="src\Ganymede\Core.cpp" />
     <ClCompile Include="src\Ganymede\Log.cpp" />
+    <ClCompile Include="src\gnmpch.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
