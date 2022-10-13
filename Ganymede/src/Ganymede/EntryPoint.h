@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <iostream>
 
 #ifdef GNM_PLATFORM_WINDOWS
 

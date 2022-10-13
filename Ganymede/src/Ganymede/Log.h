@@ -4,8 +4,6 @@
 #include "spdlog/fmt/ostr.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 
-#include <memory>
-
 namespace Ganymede {
     class GANYMEDE_API Log {
     public:

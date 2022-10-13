@@ -1,4 +1,5 @@
-﻿#include "Application.h"
+﻿#include "gnmpch.h"
+#include "Application.h"
 
 namespace Ganymede {
     Application::Application() {

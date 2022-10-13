@@ -2,9 +2,6 @@
 
 #include "Ganymede/Core.h"
 
-#include <string>
-#include <functional>
-
 namespace Ganymede {
     enum class EventType {
         None = 0,

@@ -1,8 +1,6 @@
 ﻿#pragma once
 #include "Event.h"
 
-#include <sstream>
-
 namespace Ganymede {
 
 class GANYMEDE_API MouseMovedEvent : public Event {
