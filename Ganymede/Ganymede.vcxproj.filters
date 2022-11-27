@@ -7,6 +7,12 @@
     <Filter Include="Ganymede\Events">
       <UniqueIdentifier>{F3ECD675-5F78-443A-6889-C72ED493A03A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Ganymede.h" />
@@ -31,8 +37,20 @@
     <ClInclude Include="src\Ganymede\Events\MouseEvent.h">
       <Filter>Ganymede\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Ganymede\Layer.h">
+      <Filter>Ganymede</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\LayerStack.h">
+      <Filter>Ganymede</Filter>
+    </ClInclude>
     <ClInclude Include="src\Ganymede\Log.h">
       <Filter>Ganymede</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Window.h">
+      <Filter>Ganymede</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\gnmpch.h" />
   </ItemGroup>
@@ -40,8 +58,17 @@
     <ClCompile Include="src\Ganymede\Application.cpp">
       <Filter>Ganymede</Filter>
     </ClCompile>
+    <ClCompile Include="src\Ganymede\Layer.cpp">
+      <Filter>Ganymede</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\LayerStack.cpp">
+      <Filter>Ganymede</Filter>
+    </ClCompile>
     <ClCompile Include="src\Ganymede\Log.cpp">
       <Filter>Ganymede</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\gnmpch.cpp" />
   </ItemGroup>

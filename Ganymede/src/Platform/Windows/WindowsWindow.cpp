@@ -91,13 +91,15 @@ namespace Ganymede {
                 case GLFW_PRESS: {
                     MouseButtonPressedEvent event(button);
                     data.EventCallback(event);
+                    break;
                 }
                 case GLFW_RELEASE: {
                     MouseButtonReleasedEvent event(button);
                     data.EventCallback(event);
+                    break;
                 }
                 default: {
-                    GNM_CORE_ERROR("Key action out of bounds: {0}", action);
+                    GNM_CORE_ERROR("Mouse Button action out of bounds: {0}", action);
                     break;
                 }
             }
