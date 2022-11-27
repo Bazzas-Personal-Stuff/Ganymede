@@ -1,3 +1,6 @@
 [submodule ".\\Ganymede\\vendor\\spdlog"]
 	path = .\\Ganymede\\vendor\\spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule ".\\Ganymede\\vendor\\GLFW"]
+	path = .\\Ganymede\\vendor\\GLFW
+	url = git@github.com:Bazzas-Forks/glfw.git
