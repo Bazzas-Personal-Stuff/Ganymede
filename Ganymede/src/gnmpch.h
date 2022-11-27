@@ -12,6 +12,8 @@
 #include <string>
 #include <sstream>
 
+#include "Ganymede/Log.h"
+
 #ifdef GNM_PLATFORM_WINDOWS
     #include <Windows.h>
 #endif

@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "gnmpch.h"
 #include "Ganymede/Core.h"
 
 namespace Ganymede {

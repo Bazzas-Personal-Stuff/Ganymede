@@ -40,9 +40,6 @@
     <ClCompile Include="src\Ganymede\Application.cpp">
       <Filter>Ganymede</Filter>
     </ClCompile>
-    <ClCompile Include="src\Ganymede\Core.cpp">
-      <Filter>Ganymede</Filter>
-    </ClCompile>
     <ClCompile Include="src\Ganymede\Log.cpp">
       <Filter>Ganymede</Filter>
     </ClCompile>
