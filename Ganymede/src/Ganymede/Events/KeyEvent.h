@@ -4,7 +4,7 @@
 
 namespace Ganymede {
 
-    class GANYMEDE_API KeyEvent : Event {
+    class GANYMEDE_API KeyEvent : public Event {
     public:
         inline int GetKeyCode() const { return m_keyCode; }
 
@@ -33,5 +33,19 @@ namespace Ganymede {
         
     private:
         int m_repeatCount;
+    };
+
+
+    class GANYMEDE_API KeyReleasedEvent : public KeyEvent {
+    public:
+        KeyReleasedEvent(int keyCode) : KeyEvent(keyCode) {}
+
+        std::string ToString() const override {
+            std::stringstream ss;
+            ss << "KeyReleasedEvent: " << m_keyCode;
+            return ss.str();
+        }
+
+        EVENT_CLASS_TYPE(KeyReleased)
     };
 }

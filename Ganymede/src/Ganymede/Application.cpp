@@ -1,11 +1,13 @@
 ﻿#include "gnmpch.h"
 #include "Application.h"
-#include "Ganymede/Events/ApplicationEvent.h"
-#include "Ganymede/Log.h"
 
 namespace Ganymede {
+
+#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+
     Application::Application() {
         m_Window = std::unique_ptr<Window>(Window::Create());
+        m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
     }
 
     Application::~Application() {
@@ -16,4 +18,18 @@ namespace Ganymede {
             m_Window->OnUpdate();
         }
     }
+
+    bool Application::OnWindowClose(WindowCloseEvent &e) {
+        m_Running = false;
+        return true;
+    }
+
+
+    void Application::OnEvent(Event& e) {
+        EventDispatcher dispatcher(e);
+        dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+        
+        GNM_CORE_TRACE("{0}", e);
+    }
+
 }
