@@ -4,3 +4,6 @@
 [submodule ".\\Ganymede\\vendor\\GLFW"]
 	path = .\\Ganymede\\vendor\\GLFW
 	url = git@github.com:Bazzas-Forks/glfw.git
+[submodule "Ganymede/vendor/imgui"]
+	path = Ganymede/vendor/imgui
+	url = git@github.com:Bazzas-Forks/imgui.git

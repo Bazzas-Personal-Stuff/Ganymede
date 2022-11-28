@@ -13,9 +13,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Ganymede/vendor/GLFW/include"
 IncludeDir["Glad"] = "Ganymede/vendor/Glad/include"
+IncludeDir["imgui"] = "Ganymede/vendor/imgui/include"
 
-include "Ganymede/vendor/GLFW" -- Premake submodule include
+-- Premake submodule includes
+include "Ganymede/vendor/GLFW" 
 include "Ganymede/vendor/Glad"
+include "Ganymede/vendor/imgui"
 
 project "Ganymede"
     location "Ganymede"
@@ -38,13 +41,15 @@ project "Ganymede"
         "%{prj.name}/vendor/spdlog/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
+        "%{IncludeDir.imgui}",
     }
 
     links
     {
         "GLFW",
         "Glad",
-        "opengl32.lib"
+        "ImGui",
+        "opengl32.lib",
     }
 
     filter "system:windows"
