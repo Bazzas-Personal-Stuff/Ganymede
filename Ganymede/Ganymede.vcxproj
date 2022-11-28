@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>gnmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GNM_PLATFORM_WINDOWS;GNM_BUILD_DLL;GLFW_INCLUDE_NONE;GNM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -103,7 +103,7 @@
       <PrecompiledHeaderFile>gnmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GNM_PLATFORM_WINDOWS;GNM_BUILD_DLL;GLFW_INCLUDE_NONE;GNM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -130,7 +130,7 @@
       <PrecompiledHeaderFile>gnmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GNM_PLATFORM_WINDOWS;GNM_BUILD_DLL;GLFW_INCLUDE_NONE;GNM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -160,18 +160,22 @@
     <ClInclude Include="src\Ganymede\Events\Event.h" />
     <ClInclude Include="src\Ganymede\Events\KeyEvent.h" />
     <ClInclude Include="src\Ganymede\Events\MouseEvent.h" />
+    <ClInclude Include="src\Ganymede\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Ganymede\Layer.h" />
     <ClInclude Include="src\Ganymede\LayerStack.h" />
     <ClInclude Include="src\Ganymede\Log.h" />
     <ClInclude Include="src\Ganymede\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\gnmpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ganymede\Application.cpp" />
+    <ClCompile Include="src\Ganymede\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Ganymede\Layer.cpp" />
     <ClCompile Include="src\Ganymede\LayerStack.cpp" />
     <ClCompile Include="src\Ganymede\Log.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\gnmpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

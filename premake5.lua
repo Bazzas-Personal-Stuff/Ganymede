@@ -13,7 +13,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Ganymede/vendor/GLFW/include"
 IncludeDir["Glad"] = "Ganymede/vendor/Glad/include"
-IncludeDir["imgui"] = "Ganymede/vendor/imgui/include"
+IncludeDir["imgui"] = "Ganymede/vendor/imgui"
 
 -- Premake submodule includes
 include "Ganymede/vendor/GLFW" 

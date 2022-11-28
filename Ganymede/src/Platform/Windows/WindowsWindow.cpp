@@ -69,17 +69,17 @@ namespace Ganymede {
 
             switch(action) {
                 case GLFW_PRESS: {
-                    KeyPressedEvent event(key, 0);
+                    KeyPressedEvent event(key, mods, 0);
                     data.EventCallback(event);
                     break;
                 }
                 case GLFW_RELEASE: {
-                    KeyReleasedEvent event(key);
+                    KeyReleasedEvent event(key, mods);
                     data.EventCallback(event);
                     break;
                 }
                 case GLFW_REPEAT: {
-                    KeyPressedEvent event(key, 1);
+                    KeyPressedEvent event(key, mods, 1);
                     data.EventCallback(event);
                     break;
                 }
@@ -90,17 +90,24 @@ namespace Ganymede {
             }
         });
 
+        glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) {
+            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+            KeyTypedEvent event(keycode, 0);
+            data.EventCallback(event);            
+        });
+
         glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
             WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
             switch(action) {
                 case GLFW_PRESS: {
-                    MouseButtonPressedEvent event(button);
+                    MouseButtonPressedEvent event(button, mods);
                     data.EventCallback(event);
                     break;
                 }
                 case GLFW_RELEASE: {
-                    MouseButtonReleasedEvent event(button);
+                    MouseButtonReleasedEvent event(button, mods);
                     data.EventCallback(event);
                     break;
                 }

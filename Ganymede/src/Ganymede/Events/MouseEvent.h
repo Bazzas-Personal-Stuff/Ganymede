@@ -50,22 +50,23 @@ private:
 class GANYMEDE_API MouseButtonEvent : public Event {
 public:
     inline int GetMouseButton() const { return m_button; }
-
+    inline int GetMods() const { return m_mods; }
     EVENT_CLASS_CATEGORY(EventCategoryMouseButton)
     
 protected:
-    MouseButtonEvent(int button) : m_button(button) {}
+    MouseButtonEvent(int button, int mods) : m_button(button), m_mods(mods) {}
     int m_button;
+    int m_mods;
 };
 
 
 class GANYMEDE_API MouseButtonPressedEvent : public MouseButtonEvent {
 public:
-    MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
+    MouseButtonPressedEvent(int button, int mods) : MouseButtonEvent(button, mods) {}
     
     std::string ToString() const override {
         std::stringstream ss;
-        ss << "MouseButtonPressedEvent: " << m_button;
+        ss << "MouseButtonPressedEvent: " << m_button << ", Mods: " << m_mods;
         return ss.str();
     }
 
@@ -75,11 +76,11 @@ public:
 
 class GANYMEDE_API MouseButtonReleasedEvent : public MouseButtonEvent {
 public:
-    MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
+    MouseButtonReleasedEvent(int button, int mods) : MouseButtonEvent(button, mods) {}
 
     std::string ToString() const override {
         std::stringstream ss;
-        ss << "MouseButtonReleasedEvent: " << m_button;
+        ss << "MouseButtonReleasedEvent: " << m_button << ", Mods: " << m_mods;
         return ss.str();
     }
 
