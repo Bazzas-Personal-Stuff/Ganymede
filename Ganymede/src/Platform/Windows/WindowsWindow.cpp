@@ -5,6 +5,8 @@
 #include "Ganymede/Events/KeyEvent.h"
 #include "Ganymede/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace Ganymede {
     static bool s_GLFWInitialized = false;
     static void GLFWErrorCallback(int error, const char* description) {
@@ -39,6 +41,10 @@ namespace Ganymede {
 
         m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
         glfwMakeContextCurrent(m_Window);
+
+        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        GNM_CORE_ASSERT(status, "Failed to initialize Glad");
+        
         glfwSetWindowUserPointer(m_Window, &m_Data);
         SetVSync(true);
 

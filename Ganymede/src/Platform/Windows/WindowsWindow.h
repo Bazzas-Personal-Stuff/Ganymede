@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Ganymede/Window.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Ganymede {
