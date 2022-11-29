@@ -1,11 +1,11 @@
 ﻿#include "gnmpch.h"
 #include "ImGuiLayer.h"
-#include "Ganymede/Application.h"
 
-// #include "imgui.h"
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
-
+#include "Ganymede/Application.h"
+#include "Ganymede/KeyCodes.h"
 // Temporary
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -69,123 +69,123 @@ namespace Ganymede {
 
     void ImGuiLayer::UpdateKeyModifiers(int mods) {
         ImGuiIO& io = ImGui::GetIO();
-        io.AddKeyEvent(ImGuiMod_Ctrl, (mods & GLFW_MOD_CONTROL) != 0);
-        io.AddKeyEvent(ImGuiMod_Shift, (mods & GLFW_MOD_SHIFT) != 0);
-        io.AddKeyEvent(ImGuiMod_Alt, (mods & GLFW_MOD_ALT) != 0);
-        io.AddKeyEvent(ImGuiMod_Super, (mods & GLFW_MOD_SUPER) != 0);
+        io.AddKeyEvent(ImGuiMod_Ctrl, (mods & GNM_MOD_CONTROL) != 0);
+        io.AddKeyEvent(ImGuiMod_Shift, (mods & GNM_MOD_SHIFT) != 0);
+        io.AddKeyEvent(ImGuiMod_Alt, (mods & GNM_MOD_ALT) != 0);
+        io.AddKeyEvent(ImGuiMod_Super, (mods & GNM_MOD_SUPER) != 0);
     }
 
     
     // ImGuiKey ImGuiLayer::GLFWToImGuiKey(int key)
-    ImGuiKey GLFWToImGuiKey(int key)
+    ImGuiKey GNMToImGuiKey(int key)
     {
         switch (key)
         {
-            case GLFW_KEY_TAB: return ImGuiKey_Tab;
-            case GLFW_KEY_LEFT: return ImGuiKey_LeftArrow;
-            case GLFW_KEY_RIGHT: return ImGuiKey_RightArrow;
-            case GLFW_KEY_UP: return ImGuiKey_UpArrow;
-            case GLFW_KEY_DOWN: return ImGuiKey_DownArrow;
-            case GLFW_KEY_PAGE_UP: return ImGuiKey_PageUp;
-            case GLFW_KEY_PAGE_DOWN: return ImGuiKey_PageDown;
-            case GLFW_KEY_HOME: return ImGuiKey_Home;
-            case GLFW_KEY_END: return ImGuiKey_End;
-            case GLFW_KEY_INSERT: return ImGuiKey_Insert;
-            case GLFW_KEY_DELETE: return ImGuiKey_Delete;
-            case GLFW_KEY_BACKSPACE: return ImGuiKey_Backspace;
-            case GLFW_KEY_SPACE: return ImGuiKey_Space;
-            case GLFW_KEY_ENTER: return ImGuiKey_Enter;
-            case GLFW_KEY_ESCAPE: return ImGuiKey_Escape;
-            case GLFW_KEY_APOSTROPHE: return ImGuiKey_Apostrophe;
-            case GLFW_KEY_COMMA: return ImGuiKey_Comma;
-            case GLFW_KEY_MINUS: return ImGuiKey_Minus;
-            case GLFW_KEY_PERIOD: return ImGuiKey_Period;
-            case GLFW_KEY_SLASH: return ImGuiKey_Slash;
-            case GLFW_KEY_SEMICOLON: return ImGuiKey_Semicolon;
-            case GLFW_KEY_EQUAL: return ImGuiKey_Equal;
-            case GLFW_KEY_LEFT_BRACKET: return ImGuiKey_LeftBracket;
-            case GLFW_KEY_BACKSLASH: return ImGuiKey_Backslash;
-            case GLFW_KEY_RIGHT_BRACKET: return ImGuiKey_RightBracket;
-            case GLFW_KEY_GRAVE_ACCENT: return ImGuiKey_GraveAccent;
-            case GLFW_KEY_CAPS_LOCK: return ImGuiKey_CapsLock;
-            case GLFW_KEY_SCROLL_LOCK: return ImGuiKey_ScrollLock;
-            case GLFW_KEY_NUM_LOCK: return ImGuiKey_NumLock;
-            case GLFW_KEY_PRINT_SCREEN: return ImGuiKey_PrintScreen;
-            case GLFW_KEY_PAUSE: return ImGuiKey_Pause;
-            case GLFW_KEY_KP_0: return ImGuiKey_Keypad0;
-            case GLFW_KEY_KP_1: return ImGuiKey_Keypad1;
-            case GLFW_KEY_KP_2: return ImGuiKey_Keypad2;
-            case GLFW_KEY_KP_3: return ImGuiKey_Keypad3;
-            case GLFW_KEY_KP_4: return ImGuiKey_Keypad4;
-            case GLFW_KEY_KP_5: return ImGuiKey_Keypad5;
-            case GLFW_KEY_KP_6: return ImGuiKey_Keypad6;
-            case GLFW_KEY_KP_7: return ImGuiKey_Keypad7;
-            case GLFW_KEY_KP_8: return ImGuiKey_Keypad8;
-            case GLFW_KEY_KP_9: return ImGuiKey_Keypad9;
-            case GLFW_KEY_KP_DECIMAL: return ImGuiKey_KeypadDecimal;
-            case GLFW_KEY_KP_DIVIDE: return ImGuiKey_KeypadDivide;
-            case GLFW_KEY_KP_MULTIPLY: return ImGuiKey_KeypadMultiply;
-            case GLFW_KEY_KP_SUBTRACT: return ImGuiKey_KeypadSubtract;
-            case GLFW_KEY_KP_ADD: return ImGuiKey_KeypadAdd;
-            case GLFW_KEY_KP_ENTER: return ImGuiKey_KeypadEnter;
-            case GLFW_KEY_KP_EQUAL: return ImGuiKey_KeypadEqual;
-            case GLFW_KEY_LEFT_SHIFT: return ImGuiKey_LeftShift;
-            case GLFW_KEY_LEFT_CONTROL: return ImGuiKey_LeftCtrl;
-            case GLFW_KEY_LEFT_ALT: return ImGuiKey_LeftAlt;
-            case GLFW_KEY_LEFT_SUPER: return ImGuiKey_LeftSuper;
-            case GLFW_KEY_RIGHT_SHIFT: return ImGuiKey_RightShift;
-            case GLFW_KEY_RIGHT_CONTROL: return ImGuiKey_RightCtrl;
-            case GLFW_KEY_RIGHT_ALT: return ImGuiKey_RightAlt;
-            case GLFW_KEY_RIGHT_SUPER: return ImGuiKey_RightSuper;
-            case GLFW_KEY_MENU: return ImGuiKey_Menu;
-            case GLFW_KEY_0: return ImGuiKey_0;
-            case GLFW_KEY_1: return ImGuiKey_1;
-            case GLFW_KEY_2: return ImGuiKey_2;
-            case GLFW_KEY_3: return ImGuiKey_3;
-            case GLFW_KEY_4: return ImGuiKey_4;
-            case GLFW_KEY_5: return ImGuiKey_5;
-            case GLFW_KEY_6: return ImGuiKey_6;
-            case GLFW_KEY_7: return ImGuiKey_7;
-            case GLFW_KEY_8: return ImGuiKey_8;
-            case GLFW_KEY_9: return ImGuiKey_9;
-            case GLFW_KEY_A: return ImGuiKey_A;
-            case GLFW_KEY_B: return ImGuiKey_B;
-            case GLFW_KEY_C: return ImGuiKey_C;
-            case GLFW_KEY_D: return ImGuiKey_D;
-            case GLFW_KEY_E: return ImGuiKey_E;
-            case GLFW_KEY_F: return ImGuiKey_F;
-            case GLFW_KEY_G: return ImGuiKey_G;
-            case GLFW_KEY_H: return ImGuiKey_H;
-            case GLFW_KEY_I: return ImGuiKey_I;
-            case GLFW_KEY_J: return ImGuiKey_J;
-            case GLFW_KEY_K: return ImGuiKey_K;
-            case GLFW_KEY_L: return ImGuiKey_L;
-            case GLFW_KEY_M: return ImGuiKey_M;
-            case GLFW_KEY_N: return ImGuiKey_N;
-            case GLFW_KEY_O: return ImGuiKey_O;
-            case GLFW_KEY_P: return ImGuiKey_P;
-            case GLFW_KEY_Q: return ImGuiKey_Q;
-            case GLFW_KEY_R: return ImGuiKey_R;
-            case GLFW_KEY_S: return ImGuiKey_S;
-            case GLFW_KEY_T: return ImGuiKey_T;
-            case GLFW_KEY_U: return ImGuiKey_U;
-            case GLFW_KEY_V: return ImGuiKey_V;
-            case GLFW_KEY_W: return ImGuiKey_W;
-            case GLFW_KEY_X: return ImGuiKey_X;
-            case GLFW_KEY_Y: return ImGuiKey_Y;
-            case GLFW_KEY_Z: return ImGuiKey_Z;
-            case GLFW_KEY_F1: return ImGuiKey_F1;
-            case GLFW_KEY_F2: return ImGuiKey_F2;
-            case GLFW_KEY_F3: return ImGuiKey_F3;
-            case GLFW_KEY_F4: return ImGuiKey_F4;
-            case GLFW_KEY_F5: return ImGuiKey_F5;
-            case GLFW_KEY_F6: return ImGuiKey_F6;
-            case GLFW_KEY_F7: return ImGuiKey_F7;
-            case GLFW_KEY_F8: return ImGuiKey_F8;
-            case GLFW_KEY_F9: return ImGuiKey_F9;
-            case GLFW_KEY_F10: return ImGuiKey_F10;
-            case GLFW_KEY_F11: return ImGuiKey_F11;
-            case GLFW_KEY_F12: return ImGuiKey_F12;
+            case GNM_KEY_TAB: return ImGuiKey_Tab;
+            case GNM_KEY_LEFT: return ImGuiKey_LeftArrow;
+            case GNM_KEY_RIGHT: return ImGuiKey_RightArrow;
+            case GNM_KEY_UP: return ImGuiKey_UpArrow;
+            case GNM_KEY_DOWN: return ImGuiKey_DownArrow;
+            case GNM_KEY_PAGE_UP: return ImGuiKey_PageUp;
+            case GNM_KEY_PAGE_DOWN: return ImGuiKey_PageDown;
+            case GNM_KEY_HOME: return ImGuiKey_Home;
+            case GNM_KEY_END: return ImGuiKey_End;
+            case GNM_KEY_INSERT: return ImGuiKey_Insert;
+            case GNM_KEY_DELETE: return ImGuiKey_Delete;
+            case GNM_KEY_BACKSPACE: return ImGuiKey_Backspace;
+            case GNM_KEY_SPACE: return ImGuiKey_Space;
+            case GNM_KEY_ENTER: return ImGuiKey_Enter;
+            case GNM_KEY_ESCAPE: return ImGuiKey_Escape;
+            case GNM_KEY_APOSTROPHE: return ImGuiKey_Apostrophe;
+            case GNM_KEY_COMMA: return ImGuiKey_Comma;
+            case GNM_KEY_MINUS: return ImGuiKey_Minus;
+            case GNM_KEY_PERIOD: return ImGuiKey_Period;
+            case GNM_KEY_SLASH: return ImGuiKey_Slash;
+            case GNM_KEY_SEMICOLON: return ImGuiKey_Semicolon;
+            case GNM_KEY_EQUAL: return ImGuiKey_Equal;
+            case GNM_KEY_LEFT_BRACKET: return ImGuiKey_LeftBracket;
+            case GNM_KEY_BACKSLASH: return ImGuiKey_Backslash;
+            case GNM_KEY_RIGHT_BRACKET: return ImGuiKey_RightBracket;
+            case GNM_KEY_GRAVE_ACCENT: return ImGuiKey_GraveAccent;
+            case GNM_KEY_CAPS_LOCK: return ImGuiKey_CapsLock;
+            case GNM_KEY_SCROLL_LOCK: return ImGuiKey_ScrollLock;
+            case GNM_KEY_NUM_LOCK: return ImGuiKey_NumLock;
+            case GNM_KEY_PRINT_SCREEN: return ImGuiKey_PrintScreen;
+            case GNM_KEY_PAUSE: return ImGuiKey_Pause;
+            case GNM_KEY_KP_0: return ImGuiKey_Keypad0;
+            case GNM_KEY_KP_1: return ImGuiKey_Keypad1;
+            case GNM_KEY_KP_2: return ImGuiKey_Keypad2;
+            case GNM_KEY_KP_3: return ImGuiKey_Keypad3;
+            case GNM_KEY_KP_4: return ImGuiKey_Keypad4;
+            case GNM_KEY_KP_5: return ImGuiKey_Keypad5;
+            case GNM_KEY_KP_6: return ImGuiKey_Keypad6;
+            case GNM_KEY_KP_7: return ImGuiKey_Keypad7;
+            case GNM_KEY_KP_8: return ImGuiKey_Keypad8;
+            case GNM_KEY_KP_9: return ImGuiKey_Keypad9;
+            case GNM_KEY_KP_DECIMAL: return ImGuiKey_KeypadDecimal;
+            case GNM_KEY_KP_DIVIDE: return ImGuiKey_KeypadDivide;
+            case GNM_KEY_KP_MULTIPLY: return ImGuiKey_KeypadMultiply;
+            case GNM_KEY_KP_SUBTRACT: return ImGuiKey_KeypadSubtract;
+            case GNM_KEY_KP_ADD: return ImGuiKey_KeypadAdd;
+            case GNM_KEY_KP_ENTER: return ImGuiKey_KeypadEnter;
+            case GNM_KEY_KP_EQUAL: return ImGuiKey_KeypadEqual;
+            case GNM_KEY_LEFT_SHIFT: return ImGuiKey_LeftShift;
+            case GNM_KEY_LEFT_CONTROL: return ImGuiKey_LeftCtrl;
+            case GNM_KEY_LEFT_ALT: return ImGuiKey_LeftAlt;
+            case GNM_KEY_LEFT_SUPER: return ImGuiKey_LeftSuper;
+            case GNM_KEY_RIGHT_SHIFT: return ImGuiKey_RightShift;
+            case GNM_KEY_RIGHT_CONTROL: return ImGuiKey_RightCtrl;
+            case GNM_KEY_RIGHT_ALT: return ImGuiKey_RightAlt;
+            case GNM_KEY_RIGHT_SUPER: return ImGuiKey_RightSuper;
+            case GNM_KEY_MENU: return ImGuiKey_Menu;
+            case GNM_KEY_0: return ImGuiKey_0;
+            case GNM_KEY_1: return ImGuiKey_1;
+            case GNM_KEY_2: return ImGuiKey_2;
+            case GNM_KEY_3: return ImGuiKey_3;
+            case GNM_KEY_4: return ImGuiKey_4;
+            case GNM_KEY_5: return ImGuiKey_5;
+            case GNM_KEY_6: return ImGuiKey_6;
+            case GNM_KEY_7: return ImGuiKey_7;
+            case GNM_KEY_8: return ImGuiKey_8;
+            case GNM_KEY_9: return ImGuiKey_9;
+            case GNM_KEY_A: return ImGuiKey_A;
+            case GNM_KEY_B: return ImGuiKey_B;
+            case GNM_KEY_C: return ImGuiKey_C;
+            case GNM_KEY_D: return ImGuiKey_D;
+            case GNM_KEY_E: return ImGuiKey_E;
+            case GNM_KEY_F: return ImGuiKey_F;
+            case GNM_KEY_G: return ImGuiKey_G;
+            case GNM_KEY_H: return ImGuiKey_H;
+            case GNM_KEY_I: return ImGuiKey_I;
+            case GNM_KEY_J: return ImGuiKey_J;
+            case GNM_KEY_K: return ImGuiKey_K;
+            case GNM_KEY_L: return ImGuiKey_L;
+            case GNM_KEY_M: return ImGuiKey_M;
+            case GNM_KEY_N: return ImGuiKey_N;
+            case GNM_KEY_O: return ImGuiKey_O;
+            case GNM_KEY_P: return ImGuiKey_P;
+            case GNM_KEY_Q: return ImGuiKey_Q;
+            case GNM_KEY_R: return ImGuiKey_R;
+            case GNM_KEY_S: return ImGuiKey_S;
+            case GNM_KEY_T: return ImGuiKey_T;
+            case GNM_KEY_U: return ImGuiKey_U;
+            case GNM_KEY_V: return ImGuiKey_V;
+            case GNM_KEY_W: return ImGuiKey_W;
+            case GNM_KEY_X: return ImGuiKey_X;
+            case GNM_KEY_Y: return ImGuiKey_Y;
+            case GNM_KEY_Z: return ImGuiKey_Z;
+            case GNM_KEY_F1: return ImGuiKey_F1;
+            case GNM_KEY_F2: return ImGuiKey_F2;
+            case GNM_KEY_F3: return ImGuiKey_F3;
+            case GNM_KEY_F4: return ImGuiKey_F4;
+            case GNM_KEY_F5: return ImGuiKey_F5;
+            case GNM_KEY_F6: return ImGuiKey_F6;
+            case GNM_KEY_F7: return ImGuiKey_F7;
+            case GNM_KEY_F8: return ImGuiKey_F8;
+            case GNM_KEY_F9: return ImGuiKey_F9;
+            case GNM_KEY_F10: return ImGuiKey_F10;
+            case GNM_KEY_F11: return ImGuiKey_F11;
+            case GNM_KEY_F12: return ImGuiKey_F12;
             default: return ImGuiKey_None;
         }
     }
@@ -232,7 +232,7 @@ namespace Ganymede {
     bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent &e) {
         ImGuiIO& io = ImGui::GetIO();
         // ImGuiKey imgui_key = ImGuiLayer::GLFWToImGuiKey(e.GetKeyCode());
-        ImGuiKey imgui_key = GLFWToImGuiKey(e.GetKeyCode());
+        ImGuiKey imgui_key = GNMToImGuiKey(e.GetKeyCode());
         io.AddKeyEvent(imgui_key, true);
 
         return false;
@@ -241,7 +241,7 @@ namespace Ganymede {
     bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent &e) {
         ImGuiIO& io = ImGui::GetIO();
         // ImGuiKey imgui_key = ImGuiLayer::GLFWToImGuiKey(e.GetKeyCode());
-        ImGuiKey imgui_key = GLFWToImGuiKey(e.GetKeyCode());
+        ImGuiKey imgui_key = GNMToImGuiKey(e.GetKeyCode());
         io.AddKeyEvent(imgui_key, false);
 
         return false;

@@ -5,11 +5,12 @@ public:
     ExampleLayer() : Layer("Example"){}
 
     void OnUpdate() override {
-        GNM_INFO("ExampleLayer::Update");
+        if(Ganymede::Input::IsKeyPressed(GNM_KEY_SPACE)) {
+            GNM_LOG("Space has been pressed!");
+        }
     }
 
     void OnEvent(Ganymede::Event& event) override {
-        GNM_TRACE("{0}", event);
     }
 };
 

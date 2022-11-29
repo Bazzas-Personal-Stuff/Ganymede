@@ -159,9 +159,11 @@
     <ClInclude Include="src\Ganymede\Events\MouseEvent.h" />
     <ClInclude Include="src\Ganymede\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Ganymede\Input.h" />
+    <ClInclude Include="src\Ganymede\KeyCodes.h" />
     <ClInclude Include="src\Ganymede\Layer.h" />
     <ClInclude Include="src\Ganymede\LayerStack.h" />
     <ClInclude Include="src\Ganymede\Log.h" />
+    <ClInclude Include="src\Ganymede\MouseButtonCodes.h" />
     <ClInclude Include="src\Ganymede\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
