@@ -4,6 +4,7 @@
 
 // #include "imgui.h"
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
+
 // Temporary
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -75,8 +76,8 @@ namespace Ganymede {
     }
 
     
-    ImGuiKey ImGuiLayer::GLFWToImGuiKey(int key)
-    // ImGuiKey GLFWToImGuiKey(int key)
+    // ImGuiKey ImGuiLayer::GLFWToImGuiKey(int key)
+    ImGuiKey GLFWToImGuiKey(int key)
     {
         switch (key)
         {

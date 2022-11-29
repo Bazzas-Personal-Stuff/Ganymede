@@ -4,7 +4,6 @@
 #include "Ganymede/Events/ApplicationEvent.h"
 #include "Ganymede/Events/KeyEvent.h"
 #include "Ganymede/Events/MouseEvent.h"
-#include <imgui.h>
 
 namespace Ganymede {
     class GANYMEDE_API ImGuiLayer : public Layer {
@@ -28,7 +27,7 @@ namespace Ganymede {
         bool OnWindowResizeEvent(WindowResizeEvent& e);
 
         void UpdateKeyModifiers(int mods);
-        ImGuiKey GLFWToImGuiKey(int key);
+        // static ImGuiKey GLFWToImGuiKey(int key);
 
         float m_Time = 0.f;
         

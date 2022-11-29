@@ -16,9 +16,12 @@ IncludeDir["Glad"] = "Ganymede/vendor/Glad/include"
 IncludeDir["ImGui"] = "Ganymede/vendor/imgui"
 
 -- Premake submodule includes
-include "Ganymede/vendor/GLFW" 
-include "Ganymede/vendor/Glad"
-include "Ganymede/vendor/imgui"
+group "Dependencies"
+    include "Ganymede/vendor/GLFW" 
+    include "Ganymede/vendor/Glad"
+    include "Ganymede/vendor/imgui"
+
+group ""
 
 project "Ganymede"
     location "Ganymede"
@@ -64,7 +67,7 @@ project "Ganymede"
         }
 
         postbuildcommands {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
         }
 
     filter "configurations:Debug"
