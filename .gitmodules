@@ -7,3 +7,6 @@
 [submodule "Ganymede/vendor/imgui"]
 	path = Ganymede/vendor/imgui
 	url = git@github.com:Bazzas-Forks/imgui.git
+[submodule "Ganymede/vendor/glm"]
+	path = Ganymede/vendor/glm
+	url = https://github.com/g-truc/glm.git

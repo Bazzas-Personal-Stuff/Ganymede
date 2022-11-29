@@ -14,6 +14,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Ganymede/vendor/GLFW/include"
 IncludeDir["Glad"] = "Ganymede/vendor/Glad/include"
 IncludeDir["ImGui"] = "Ganymede/vendor/imgui"
+IncludeDir["glm"] = "Ganymede/vendor/glm"
 
 -- Premake submodule includes
 group "Dependencies"
@@ -37,7 +38,10 @@ project "Ganymede"
 
     files {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/glm/glm/**.hpp",
+        "%{prj.name}/vendor/glm/glm/**.inl",
+        --"%{prj.name}/vendor/glm/glm/**.h",
     }
 
     includedirs {
@@ -46,6 +50,7 @@ project "Ganymede"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
+        "%{IncludeDir.glm}",
     }
 
     links
@@ -96,12 +101,15 @@ project "Sandbox"
 
     files {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        --"%{prj.name}/vendor/glm/glm/**.hpp",
+        --"%{prj.name}/vendor/glm/glm/**.inl",
     }
     
     includedirs {
         "Ganymede/vendor/spdlog/include",
-        "Ganymede/src"
+        "Ganymede/src",
+        "%{IncludeDir.glm}",
     }
     
     links {
