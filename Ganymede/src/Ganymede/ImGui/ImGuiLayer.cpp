@@ -2,7 +2,7 @@
 #include "ImGuiLayer.h"
 #include "Ganymede/Application.h"
 
-#include "imgui.h"
+// #include "imgui.h"
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
 // Temporary
 #include <glad/glad.h>
@@ -76,6 +76,7 @@ namespace Ganymede {
 
     
     ImGuiKey ImGuiLayer::GLFWToImGuiKey(int key)
+    // ImGuiKey GLFWToImGuiKey(int key)
     {
         switch (key)
         {
@@ -229,7 +230,8 @@ namespace Ganymede {
 
     bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent &e) {
         ImGuiIO& io = ImGui::GetIO();
-        ImGuiKey imgui_key = ImGuiLayer::GLFWToImGuiKey(e.GetKeyCode());
+        // ImGuiKey imgui_key = ImGuiLayer::GLFWToImGuiKey(e.GetKeyCode());
+        ImGuiKey imgui_key = GLFWToImGuiKey(e.GetKeyCode());
         io.AddKeyEvent(imgui_key, true);
 
         return false;
@@ -237,7 +239,8 @@ namespace Ganymede {
 
     bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent &e) {
         ImGuiIO& io = ImGui::GetIO();
-        ImGuiKey imgui_key = ImGuiLayer::GLFWToImGuiKey(e.GetKeyCode());
+        // ImGuiKey imgui_key = ImGuiLayer::GLFWToImGuiKey(e.GetKeyCode());
+        ImGuiKey imgui_key = GLFWToImGuiKey(e.GetKeyCode());
         io.AddKeyEvent(imgui_key, false);
 
         return false;

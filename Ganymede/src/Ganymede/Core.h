@@ -10,6 +10,9 @@
     #error Ganymede currently only supports Windows
 #endif
 
+#ifdef GNM_DEBUG
+    #define GNM_ENABLE_ASSERTS
+#endif
 
 #ifdef GNM_ENABLE_ASSERTS
     #define GNM_ASSERT(x, ...) {if(!(x)) { GNM_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}

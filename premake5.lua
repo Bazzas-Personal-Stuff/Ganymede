@@ -13,7 +13,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Ganymede/vendor/GLFW/include"
 IncludeDir["Glad"] = "Ganymede/vendor/Glad/include"
-IncludeDir["imgui"] = "Ganymede/vendor/imgui"
+IncludeDir["ImGui"] = "Ganymede/vendor/imgui"
 
 -- Premake submodule includes
 include "Ganymede/vendor/GLFW" 
@@ -24,6 +24,7 @@ project "Ganymede"
     location "Ganymede"
     kind "SharedLib"
     language "C++"
+    staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -41,7 +42,7 @@ project "Ganymede"
         "%{prj.name}/vendor/spdlog/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
-        "%{IncludeDir.imgui}",
+        "%{IncludeDir.ImGui}",
     }
 
     links
@@ -54,7 +55,6 @@ project "Ganymede"
 
     filter "system:windows"
         cppdialect "C++20"
-        staticruntime "On"
         systemversion "latest"
 
         defines {
@@ -69,23 +69,24 @@ project "Ganymede"
 
     filter "configurations:Debug"
         defines "GNM_DEBUG"
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
     
     filter "configurations:Release"
         defines "GNM_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "GNM_DIST"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
 project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
+    staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -106,7 +107,6 @@ project "Sandbox"
 
     filter "system:windows"
         cppdialect "C++20"
-        staticruntime "On"
         systemversion "latest"
 
         defines {
@@ -116,15 +116,15 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines "GNM_DEBUG"
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "GNM_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "GNM_DIST"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
