@@ -1,6 +1,9 @@
 ﻿#include "gnmpch.h"
 #include "Application.h"
 
+#include "Input.h"
+#include "glad/glad.h"
+
 namespace Ganymede {
 
     Application* Application::s_Instance = nullptr;
@@ -43,6 +46,11 @@ namespace Ganymede {
 
     void Application::Run() {
         while (m_Running) {
+            
+            // TODO: Replace raw OpenGL calls
+            glClearColor(0, 0, 0, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+            
             for(Layer* layer : m_LayerStack) {
                 layer->OnUpdate();    
             }

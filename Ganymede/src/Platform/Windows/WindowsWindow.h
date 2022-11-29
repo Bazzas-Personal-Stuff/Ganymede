@@ -21,6 +21,7 @@ namespace Ganymede {
     private:
         virtual void Init(const WindowProps& props);
         virtual void Shutdown();
+        virtual void* GetNativeWindow() const override { return m_Window; }
         
         GLFWwindow* m_Window{};
         struct WindowData {
@@ -30,7 +31,7 @@ namespace Ganymede {
 
             EventCallbackFn EventCallback;
         };
-
+        
         WindowData m_Data;
     };
 }
