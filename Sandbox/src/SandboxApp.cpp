@@ -19,7 +19,6 @@ class Sandbox : public Ganymede::Application {
 public:
     Sandbox() {
         PushLayer(new ExampleLayer());
-        PushOverlay(new Ganymede::ImGuiLayer());
     }
     ~Sandbox(){}
 };

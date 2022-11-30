@@ -5,6 +5,7 @@
 #include "Ganymede/LayerStack.h"
 #include "Ganymede/Events/Event.h"
 #include "Ganymede/Events/ApplicationEvent.h"
+#include "Ganymede/ImGui/ImGuiLayer.h"
 
 namespace Ganymede {
     class GANYMEDE_API Application {
@@ -25,6 +26,7 @@ namespace Ganymede {
         bool OnWindowClose(WindowCloseEvent &e);
 
         std::unique_ptr<Window> m_Window;
+        ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
 
