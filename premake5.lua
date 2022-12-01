@@ -26,9 +26,10 @@ group ""
 
 project "Ganymede"
     location "Ganymede"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
-    staticruntime "off"
+    cppdialect "C++20"
+    staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -42,6 +43,10 @@ project "Ganymede"
         "%{prj.name}/vendor/glm/glm/**.hpp",
         "%{prj.name}/vendor/glm/glm/**.inl",
         --"%{prj.name}/vendor/glm/glm/**.h",
+    }
+
+    defines {
+        "_CRT_SECURE_NO_WARNINGS",
     }
 
     includedirs {
@@ -62,7 +67,6 @@ project "Ganymede"
     }
 
     filter "system:windows"
-        cppdialect "C++20"
         systemversion "latest"
 
         defines {
@@ -78,23 +82,24 @@ project "Ganymede"
     filter "configurations:Debug"
         defines "GNM_DEBUG"
         runtime "Debug"
-        symbols "On"
+        symbols "on"
     
     filter "configurations:Release"
         defines "GNM_RELEASE"
         runtime "Release"
-        optimize "On"
+        optimize "on"
 
     filter "configurations:Dist"
         defines "GNM_DIST"
         runtime "Release"
-        optimize "On"
+        optimize "on"
 
 project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
-    staticruntime "off"
+    cppdialect "C++20"
+    staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -109,6 +114,7 @@ project "Sandbox"
     includedirs {
         "Ganymede/vendor/spdlog/include",
         "Ganymede/src",
+        "Ganymede/vendor",
         "%{IncludeDir.glm}",
     }
     
@@ -117,7 +123,6 @@ project "Sandbox"
     }
 
     filter "system:windows"
-        cppdialect "C++20"
         systemversion "latest"
 
         defines {
@@ -128,14 +133,14 @@ project "Sandbox"
     filter "configurations:Debug"
         defines "GNM_DEBUG"
         runtime "Debug"
-        symbols "On"
+        symbols "on"
 
     filter "configurations:Release"
         defines "GNM_RELEASE"
         runtime "Release"
-        optimize "On"
+        optimize "on"
 
     filter "configurations:Dist"
         defines "GNM_DIST"
         runtime "Release"
-        optimize "On"
+        optimize "on"

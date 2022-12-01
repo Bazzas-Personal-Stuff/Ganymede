@@ -4,7 +4,7 @@
 
 extern Ganymede::Application* Ganymede::CreateApplication();
 
-inline int main(int argc, char** argv) {
+int main(int argc, char** argv) {
     Ganymede::Log::Init();
 
     auto app = Ganymede::CreateApplication();
