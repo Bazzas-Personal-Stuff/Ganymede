@@ -6,6 +6,7 @@
 #include "Ganymede/Events/Event.h"
 #include "Ganymede/Events/ApplicationEvent.h"
 #include "Ganymede/ImGui/ImGuiLayer.h"
+#include "Ganymede/Renderer/Shader.h"
 
 namespace Ganymede {
     class GANYMEDE_API Application {
@@ -33,6 +34,7 @@ namespace Ganymede {
         unsigned int m_VertexArray;
         unsigned int m_VertexBuffer;
         unsigned int m_IndexBuffer;
+        std::unique_ptr<Shader> m_Shader;
 
     private:
         static Application* s_Instance;

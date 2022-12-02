@@ -165,6 +165,7 @@
     <ClInclude Include="src\Ganymede\Log.h" />
     <ClInclude Include="src\Ganymede\MouseButtonCodes.h" />
     <ClInclude Include="src\Ganymede\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Ganymede\Renderer\Shader.h" />
     <ClInclude Include="src\Ganymede\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
@@ -594,6 +595,7 @@
     <ClCompile Include="src\Ganymede\Layer.cpp" />
     <ClCompile Include="src\Ganymede\LayerStack.cpp" />
     <ClCompile Include="src\Ganymede\Log.cpp" />
+    <ClCompile Include="src\Ganymede\Renderer\Shader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
