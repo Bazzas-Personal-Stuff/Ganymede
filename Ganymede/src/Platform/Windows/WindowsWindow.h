@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Ganymede/Window.h"
+#include "Ganymede/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -23,7 +24,9 @@ namespace Ganymede {
         virtual void Shutdown();
         virtual void* GetNativeWindow() const override { return m_Window; }
         
-        GLFWwindow* m_Window{};
+        GLFWwindow* m_Window;
+        GraphicsContext* m_Context;
+        
         struct WindowData {
             std::string Title;
             unsigned int Width, Height;

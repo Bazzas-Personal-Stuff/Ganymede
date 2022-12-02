@@ -1,5 +1,7 @@
 ﻿#include "gnmpch.h"
 #include "Log.h"
+#include "spdlog/fmt/ostr.h"
+
 namespace Ganymede {
     std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
     std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
