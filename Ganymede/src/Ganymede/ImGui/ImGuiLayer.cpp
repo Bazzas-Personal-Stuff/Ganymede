@@ -14,9 +14,6 @@ namespace Ganymede {
         
     }
 
-    ImGuiLayer::~ImGuiLayer() {
-    }
-
 
     void ImGuiLayer::OnAttach() {
 

@@ -6,7 +6,7 @@ namespace Ganymede {
     class GANYMEDE_API ImGuiLayer : public Layer {
     public:
         ImGuiLayer();
-        ~ImGuiLayer();
+        virtual ~ImGuiLayer() override = default;
 
         virtual void OnAttach() override;
         virtual void OnDetach() override;
