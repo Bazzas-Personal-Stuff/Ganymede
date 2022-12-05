@@ -1,32 +1,12 @@
 ﻿#include "gnmpch.h"
 #include "Application.h"
 
-#include "Input.h"
-#include "glad/glad.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
+#include "Renderer/Renderer.h"
 
 namespace Ganymede {
 
     Application* Application::s_Instance = nullptr;
-
-    static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type) {
-        switch(type) {
-        case ShaderDataType::Float: return GL_FLOAT;
-        case ShaderDataType::Float2: return GL_FLOAT;
-        case ShaderDataType::Float3: return GL_FLOAT;
-        case ShaderDataType::Float4: return GL_FLOAT;
-        case ShaderDataType::Mat3: return GL_FLOAT;
-        case ShaderDataType::Mat4: return GL_FLOAT;
-        case ShaderDataType::Int: return GL_INT;
-        case ShaderDataType::Int2: return GL_INT;
-        case ShaderDataType::Int3: return GL_INT;
-        case ShaderDataType::Int4: return GL_INT;
-        case ShaderDataType::Bool: return GL_BOOL;
-        }
-
-        GNM_CORE_ASSERT(false, "Unknown shader data type")
-        return 0;    
-    }
     
     Application::Application() {
         GNM_CORE_ASSERT(s_Instance == nullptr, "Application instance already exists")
@@ -37,46 +17,48 @@ namespace Ganymede {
         m_ImGuiLayer = new ImGuiLayer();
         PushOverlay(m_ImGuiLayer);
 
-        // Vertex buffer
-        glGenVertexArrays(1, &m_VertexArray);
-        glBindVertexArray(m_VertexArray);
-
+        // TRIANGLE
+        BufferLayout layout = {
+            { ShaderDataType::Float3, "a_Position"},
+            { ShaderDataType::Float4, "a_Color"},
+        };
         float vertices[3 * 7] = {
-            -0.5f,  -0.5f,  0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
-            0.5f,   -0.5f,  0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-            0.0f,   0.5f,   0.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+            -0.5f,  -0.5f,  0.0f,       1.0f,   0.0f,   1.0f,   1.0f,
+            0.5f,   -0.5f,  0.0f,       0.0f,   1.0f,   1.0f,   1.0f,
+            0.0f,   0.5f,   0.0f,       1.0f,   1.0f,   0.0f,   1.0f,
+        };
+        uint32_t indices[3 * 1] = {
+            0, 1, 2
         };
 
-        m_VertexBuffer = std::unique_ptr<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
+        m_TriangleVertexArray = std::shared_ptr<VertexArray>(VertexArray::Create());
 
-        {
-            BufferLayout layout = {
-                { ShaderDataType::Float3, "a_Position"},
-                { ShaderDataType::Float4, "a_Color"},
-            };
+        std::shared_ptr<VertexBuffer> triangleVertBuffer = std::shared_ptr<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
+        triangleVertBuffer->SetLayout(layout);
+        std::shared_ptr<IndexBuffer> triangleIndexBuffer = std::shared_ptr<IndexBuffer>(IndexBuffer::Create(indices, (uint32_t)std::size(indices)));
+        m_TriangleVertexArray->AddVertexBuffer(triangleVertBuffer);
+        m_TriangleVertexArray->SetIndexBuffer(triangleIndexBuffer);
 
-            m_VertexBuffer->SetLayout(layout);
-        }
+        // SQUARE
+        float squareVertices[4*7] ={
+            -0.5f,  -0.5f,  0.0f,       1.0f,   0.0f,   1.0f,   1.0f, 
+             0.5f,  -0.5f,  0.0f,       0.0f,   1.0f,   1.0f,   1.0f, 
+             0.5f,   0.5f,  0.0f,       1.0f,   1.0f,   0.0f,   1.0f, 
+            -0.5f,   0.5f,  0.0f,       1.0f,   1.0f,   1.0f,   1.0f, 
+        };
+        uint32_t squareIndices[3 * 2] = {
+            0, 1, 2,
+            2, 3, 0,
+        };
+
+        m_SquareVertexArray = std::shared_ptr<VertexArray>(VertexArray::Create());
+
+        std::shared_ptr<VertexBuffer> squareVertBuffer = std::shared_ptr<VertexBuffer>(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+        squareVertBuffer->SetLayout(layout); // using same layout, same shader as triangle
+        std::shared_ptr<IndexBuffer> squareIndexBuffer = std::shared_ptr<IndexBuffer>(IndexBuffer::Create(squareIndices, (uint32_t)std::size(squareIndices)));
+        m_SquareVertexArray->AddVertexBuffer(squareVertBuffer);
+        m_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
         
-        const auto& layout = m_VertexBuffer->GetLayout();
-
-        uint32_t index = 0;
-        for(const auto& element : layout) {
-            glEnableVertexAttribArray(index);
-            glVertexAttribPointer(index,
-                element.GetComponentCount(),
-                ShaderDataTypeToOpenGLBaseType(element.Type),
-                element.Normalized ? GL_TRUE : GL_FALSE,
-                layout.GetStride(),
-                (const void*)(element.Offset));
-            index++;            
-        }
-
-        // Index buffer
-
-        uint32_t indices[3] = {0, 1, 2};
-        m_IndexBuffer = std::unique_ptr<IndexBuffer>(IndexBuffer::Create(indices, (uint32_t)std::size(indices)));
-
         std::string vertexSrc = R"(
         #version 330 core
 
@@ -106,7 +88,7 @@ namespace Ganymede {
         }
         )";
         
-        m_Shader = std::unique_ptr<Shader>(Shader::Create(vertexSrc, fragmentSrc));
+        m_Shader = std::shared_ptr<Shader>(Shader::Create(vertexSrc, fragmentSrc));
     }
 
 
@@ -135,14 +117,21 @@ namespace Ganymede {
 
     void Application::Run() {
         while (m_Running) {
-            
-            // TODO: Replace raw OpenGL calls
-            glClearColor(0.1f, 0.1f, 0.1f, 1);
-            glClear(GL_COLOR_BUFFER_BIT);
 
+            RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+            RenderCommand::Clear();
+            
+            Renderer::BeginScene();
+
+            // Render square and triangle with the same shader
             m_Shader->Bind();
-            glBindVertexArray(m_VertexArray);
-            glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+            Renderer::Submit(m_SquareVertexArray);
+            Renderer::Submit(m_TriangleVertexArray);
+
+            Renderer::EndScene();
+            // Renderer::Flush();
+            
+
             
             for(Layer* layer : m_LayerStack) {
                 layer->OnUpdate();    

@@ -7,7 +7,7 @@
 #include "Ganymede/Events/ApplicationEvent.h"
 #include "Ganymede/ImGui/ImGuiLayer.h"
 #include "Ganymede/Renderer/Shader.h"
-#include "Renderer/Buffer.h"
+#include "Renderer/VertexArray.h"
 
 namespace Ganymede {
     class GANYMEDE_API Application {
@@ -32,10 +32,12 @@ namespace Ganymede {
         bool m_Running = true;
         LayerStack m_LayerStack;
 
-        unsigned int m_VertexArray;
-        std::unique_ptr<Shader> m_Shader;
-        std::unique_ptr<VertexBuffer> m_VertexBuffer;
-        std::unique_ptr<IndexBuffer> m_IndexBuffer;
+        std::shared_ptr<Shader> m_Shader;
+        // std::shared_ptr<VertexBuffer> m_VertexBuffer;
+        // std::shared_ptr<IndexBuffer> m_IndexBuffer;
+
+        std::shared_ptr<VertexArray> m_TriangleVertexArray;
+        std::shared_ptr<VertexArray> m_SquareVertexArray;
 
     private:
         static Application* s_Instance;
