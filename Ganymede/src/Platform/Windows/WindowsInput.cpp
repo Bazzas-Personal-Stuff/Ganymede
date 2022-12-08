@@ -21,7 +21,7 @@ namespace Ganymede {
         
     }
 
-    std::pair<float, float> WindowsInput::GetMousePositionImpl() {
+    glm::vec2 WindowsInput::GetMousePositionImpl() {
         auto window = static_cast<GLFWwindow*>( Application::Get().GetWindow().GetNativeWindow());
         double xPos, yPos;
         glfwGetCursorPos(window, &xPos, &yPos);
@@ -29,13 +29,11 @@ namespace Ganymede {
     }
 
     float WindowsInput::GetMouseXImpl() {
-        auto[x, y] = GetMousePositionImpl();
-        return x;        
+        return GetMousePositionImpl().x;
     }
 
     float WindowsInput::GetMouseYImpl() {
-        auto[x, y] = GetMousePositionImpl();
-        return y;        
+        return GetMousePositionImpl().y;
     }
 
 }
