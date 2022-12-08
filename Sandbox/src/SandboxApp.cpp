@@ -1,4 +1,5 @@
 #include <Ganymede.h>
+#include <Ganymede/EntryPoint.h>
 #include "Sandbox2D.h"
 
 class Sandbox : public Ganymede::Application {

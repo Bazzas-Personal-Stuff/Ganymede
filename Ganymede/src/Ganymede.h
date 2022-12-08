@@ -11,6 +11,14 @@
 #include "Ganymede/MouseButtonCodes.h"
 
 #include "Ganymede/ImGui/ImGuiLayer.h"
-// --------------Entry Point--------------
-#include "Ganymede/EntryPoint.h"
+
+// --------------Renderer-----------------
+#include "Ganymede/Renderer/Renderer.h"
+#include "Ganymede/Renderer/RenderCommand.h"
+
+#include "Ganymede/Renderer/Buffer.h"
+#include "Ganymede/Renderer/Shader.h"
+#include "Ganymede/Renderer/VertexArray.h"
+
+#include "Ganymede/Renderer/OrthographicCamera.h"
 // ---------------------------------------

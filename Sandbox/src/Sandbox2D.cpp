@@ -1,13 +1,5 @@
 ﻿#include "Sandbox2D.h"
 
-#include "Ganymede/Application.h"
-#include "Ganymede/Input.h"
-#include "Ganymede/KeyCodes.h"
-#include "Ganymede/Events/MouseEvent.h"
-#include "Ganymede/Renderer/Buffer.h"
-#include "Ganymede/Renderer/RenderCommand.h"
-#include "Ganymede/Renderer/Renderer.h"
-#include "Ganymede/Renderer/VertexArray.h"
 
 Sandbox2D::Sandbox2D()
     : Layer("Sandbox2D"),
@@ -105,15 +97,7 @@ void Sandbox2D::OnUpdate() {
     Ganymede::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     Ganymede::RenderCommand::Clear();
 
-    float width = (float)Ganymede::Application::Get().GetWindow().GetWidth();
-    float height = (float)Ganymede::Application::Get().GetWindow().GetHeight();
-    glm::vec2 mousePos = Ganymede::Input::GetMousePosition();
-    mousePos -= glm::vec2({width/2.f, height/2.f});
-    mousePos *= 1.0f / height;
-    mousePos.y *= -1;
-    m_Camera.SetPosition({ mousePos, 0.0f});
-    m_Camera.SetRotation(mousePos.x * 30.0f);
-    // m_Camera.SetPosition({0.5f, 0.5f, 0});
+    // --------- RENDER ------------
     Ganymede::Renderer::BeginScene(m_Camera);
 
     // Render square and triangle with the same shader
@@ -122,10 +106,8 @@ void Sandbox2D::OnUpdate() {
 
     Ganymede::Renderer::EndScene();
     // Renderer::Flush();
+    // -----------------------------
     
-    if(Ganymede::Input::IsKeyPressed(GNM_KEY_SPACE)) {
-        GNM_LOG("Space has been pressed!");
-    }
 }
 
 void Sandbox2D::OnImGuiRender() {
@@ -133,5 +115,22 @@ void Sandbox2D::OnImGuiRender() {
 }
 
 void Sandbox2D::OnEvent(Ganymede::Event& event) {
+    Ganymede::EventDispatcher dispatcher(event);
+    dispatcher.Dispatch<Ganymede::MouseMovedEvent>(GNM_BIND_EVENT_FN(Sandbox2D::OnMouseMovedEvent));
 }
+
+bool Sandbox2D::OnMouseMovedEvent(Ganymede::MouseMovedEvent& event) {
+    float width = (float)Ganymede::Application::Get().GetWindow().GetWidth();
+    float height = (float)Ganymede::Application::Get().GetWindow().GetHeight();
+
+    glm::vec2 mousePos {event.GetX(), event.GetY()};
+    mousePos -= glm::vec2({width/2.f, height/2.f});
+    mousePos *= 1.0f / height;
+    mousePos.y *= -1;
+    m_Camera.SetPosition({ mousePos, 0.0f});
+    m_Camera.SetRotation(mousePos.x * 30.0f);
+
+    return false;
+}
+
 

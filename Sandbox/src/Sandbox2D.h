@@ -1,8 +1,6 @@
 ﻿#pragma once
-#include "Ganymede/Layer.h"
-#include "Ganymede/Renderer/OrthographicCamera.h"
-#include "Ganymede/Renderer/Shader.h"
-#include "Ganymede/Renderer/VertexArray.h"
+#include <Ganymede.h>
+#include "Ganymede/Events/MouseEvent.h"
 
 class Sandbox2D : public Ganymede::Layer {
 public:
@@ -13,7 +11,7 @@ public:
     virtual void OnUpdate() override;
     virtual void OnImGuiRender() override;
     virtual void OnEvent(Ganymede::Event& event) override;
-    void OnMouseMovedEvent(int deltaX, int deltaY);
+    bool OnMouseMovedEvent(Ganymede::MouseMovedEvent& event);
 
 private:
     Ganymede::OrthographicCamera m_Camera;
