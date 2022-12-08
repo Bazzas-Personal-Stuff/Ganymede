@@ -1,5 +1,7 @@
 ﻿#include "Sandbox2D.h"
 
+#include "Ganymede/Events/KeyEvent.h"
+
 
 Sandbox2D::Sandbox2D()
     : Layer("Sandbox2D"),
@@ -93,9 +95,39 @@ void Sandbox2D::OnDetach() {
 }
 
 void Sandbox2D::OnUpdate() {
-    Layer::OnUpdate();
+    
     Ganymede::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     Ganymede::RenderCommand::Clear();
+
+    // --------- Camera movement ---
+    float deltaTime = Ganymede::Time::Delta();
+    // float deltaTime = 1.0f;
+    
+    if(Ganymede::Input::GetKey(GNM_KEY_W)) {
+        m_CameraPosition.y += deltaTime * m_CameraSpeed;
+    }
+    if(Ganymede::Input::GetKey(GNM_KEY_S)) {
+        m_CameraPosition.y -= deltaTime * m_CameraSpeed;
+    }
+    if(Ganymede::Input::GetKey(GNM_KEY_D)) {
+        m_CameraPosition.x += deltaTime * m_CameraSpeed;
+    }
+    if(Ganymede::Input::GetKey(GNM_KEY_A)) {
+        m_CameraPosition.x -= deltaTime * m_CameraSpeed;
+    }
+
+    // mouse
+    float width = (float)Ganymede::Application::Get().GetWindow().GetWidth();
+    float height = (float)Ganymede::Application::Get().GetWindow().GetHeight();
+
+    glm::vec2 mousePos = Ganymede::Input::GetMousePosition();
+    mousePos -= glm::vec2({width/2.f, height/2.f});
+    mousePos *= 1.0f / height;
+    mousePos.y *= -1;
+    
+    m_Camera.SetPosition({m_CameraPosition + mousePos, 0.f});
+    m_Camera.SetRotation(mousePos.x * 30.0f);
+    // -----------------------------
 
     // --------- RENDER ------------
     Ganymede::Renderer::BeginScene(m_Camera);
@@ -116,21 +148,17 @@ void Sandbox2D::OnImGuiRender() {
 
 void Sandbox2D::OnEvent(Ganymede::Event& event) {
     Ganymede::EventDispatcher dispatcher(event);
-    dispatcher.Dispatch<Ganymede::MouseMovedEvent>(GNM_BIND_EVENT_FN(Sandbox2D::OnMouseMovedEvent));
 }
 
 bool Sandbox2D::OnMouseMovedEvent(Ganymede::MouseMovedEvent& event) {
-    float width = (float)Ganymede::Application::Get().GetWindow().GetWidth();
-    float height = (float)Ganymede::Application::Get().GetWindow().GetHeight();
-
-    glm::vec2 mousePos {event.GetX(), event.GetY()};
-    mousePos -= glm::vec2({width/2.f, height/2.f});
-    mousePos *= 1.0f / height;
-    mousePos.y *= -1;
-    m_Camera.SetPosition({ mousePos, 0.0f});
-    m_Camera.SetRotation(mousePos.x * 30.0f);
+    // m_Camera.SetPosition({ m_CameraPosition + mousePos, 0.0f});
 
     return false;
 }
+
+bool Sandbox2D::OnKeyEvent(Ganymede::KeyEvent& event) {
+    return false;
+}
+
 
 

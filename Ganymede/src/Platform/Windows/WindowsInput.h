@@ -4,8 +4,8 @@
 namespace Ganymede {
     class WindowsInput : public Input {
     protected:
-        virtual bool IsKeyPressedImpl(int keyCode) override;
-        virtual bool IsMouseButtonPressedImpl(int button) override;
+        virtual bool GetKeyImpl(int keyCode) override;
+        virtual bool GetMouseButtonImpl(int button) override;
         virtual glm::vec2 GetMousePositionImpl() override;
         virtual float GetMouseXImpl() override;
         virtual float GetMouseYImpl() override;

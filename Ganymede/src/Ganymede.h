@@ -6,6 +6,9 @@
 #include "Ganymede/Layer.h"
 #include "Ganymede/Log.h"
 
+#include "Ganymede/Core/Timestep.h"
+#include "Ganymede/Core/Time.h"
+
 #include "Ganymede/Input.h"
 #include "Ganymede/KeyCodes.h"
 #include "Ganymede/MouseButtonCodes.h"

@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Core/Timestep.h"
 #include "Ganymede/Core.h"
 #include "Ganymede/Window.h"
 
@@ -24,12 +25,11 @@ namespace Ganymede {
         inline Window& GetWindow() { return *m_Window; }
     private:
         bool OnWindowClose(WindowCloseEvent &e);
-
+    private:
         std::unique_ptr<Window> m_Window;
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
-
     private:
         static Application* s_Instance;
     };

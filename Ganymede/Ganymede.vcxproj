@@ -152,6 +152,8 @@
     <ClInclude Include="src\Ganymede.h" />
     <ClInclude Include="src\Ganymede\Application.h" />
     <ClInclude Include="src\Ganymede\Core.h" />
+    <ClInclude Include="src\Ganymede\Core\Time.h" />
+    <ClInclude Include="src\Ganymede\Core\Timestep.h" />
     <ClInclude Include="src\Ganymede\EntryPoint.h" />
     <ClInclude Include="src\Ganymede\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Ganymede\Events\Event.h" />
@@ -600,6 +602,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ganymede\Application.cpp" />
+    <ClCompile Include="src\Ganymede\Core\Time.cpp" />
     <ClCompile Include="src\Ganymede\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Ganymede\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Ganymede\Layer.cpp" />
