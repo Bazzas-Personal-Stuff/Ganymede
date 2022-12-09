@@ -1,6 +1,7 @@
 ﻿#include "Sandbox2D.h"
 
 #include "Ganymede/Events/KeyEvent.h"
+#include "glm/gtx/transform.hpp"
 
 
 Sandbox2D::Sandbox2D()
@@ -57,6 +58,7 @@ Sandbox2D::Sandbox2D()
     layout(location=1) in vec4 a_Color;
 
     uniform mat4 u_ViewProjection;
+    uniform mat4 u_Transform;
     
     out vec3 v_Position;
     out vec4 v_Color;
@@ -64,7 +66,7 @@ Sandbox2D::Sandbox2D()
     void main(){
         v_Position = a_Position;
         v_Color = a_Color;
-        gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+        gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
     }
     )";
 
@@ -116,6 +118,14 @@ void Sandbox2D::OnUpdate() {
         m_CameraPosition.x -= deltaTime * m_CameraSpeed;
     }
 
+    // --------- Square movement ---
+    if(Ganymede::Input::GetKey(GNM_KEY_E)) {
+        m_SquarePosition.x += deltaTime * m_SquareSpeed;
+    }
+    if(Ganymede::Input::GetKey(GNM_KEY_Q)) {
+        m_SquarePosition.x -= deltaTime * m_SquareSpeed;
+    }
+
     // mouse
     float width = (float)Ganymede::Application::Get().GetWindow().GetWidth();
     float height = (float)Ganymede::Application::Get().GetWindow().GetHeight();
@@ -124,6 +134,8 @@ void Sandbox2D::OnUpdate() {
     mousePos -= glm::vec2({width/2.f, height/2.f});
     mousePos *= 1.0f / height;
     mousePos.y *= -1;
+
+    glm::mat4 squareTransform = glm::translate(glm::mat4(0.1f), m_SquarePosition);
     
     m_Camera.SetPosition({m_CameraPosition + mousePos, 0.f});
     m_Camera.SetRotation(mousePos.x * 30.0f);
@@ -133,7 +145,7 @@ void Sandbox2D::OnUpdate() {
     Ganymede::Renderer::BeginScene(m_Camera);
 
     // Render square and triangle with the same shader
-    Ganymede::Renderer::Submit(m_Shader, m_SquareVertexArray);
+    Ganymede::Renderer::Submit(m_Shader, m_SquareVertexArray, squareTransform);
     Ganymede::Renderer::Submit(m_Shader, m_TriangleVertexArray);
 
     Ganymede::Renderer::EndScene();

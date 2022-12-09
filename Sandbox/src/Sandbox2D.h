@@ -23,6 +23,8 @@ private:
     std::shared_ptr<Ganymede::VertexArray> m_SquareVertexArray;
 
     glm::vec2 m_CameraPosition {0.0f};
+    glm::vec3 m_SquarePosition {0.0f};
     float m_CameraSpeed = 1.0f;
+    float m_SquareSpeed = 1.0f;
     
 };
