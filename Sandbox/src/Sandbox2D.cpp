@@ -1,7 +1,10 @@
 ﻿#include "Sandbox2D.h"
 
 #include "Ganymede/Events/KeyEvent.h"
+#include "glm/gtc/type_ptr.hpp"
 #include "glm/gtx/transform.hpp"
+#include "imgui/imgui.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 
 
 Sandbox2D::Sandbox2D()
@@ -50,8 +53,9 @@ Sandbox2D::Sandbox2D()
     std::shared_ptr<Ganymede::IndexBuffer> squareIndexBuffer = std::shared_ptr<Ganymede::IndexBuffer>(Ganymede::IndexBuffer::Create(squareIndices, (uint32_t)std::size(squareIndices)));
     m_SquareVertexArray->AddVertexBuffer(squareVertBuffer);
     m_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
-    
-    std::string vertexSrc = R"(
+
+    // ============================== Multicolor Shader ===================================
+    std::string multiColorVertexSrc = R"(
     #version 330 core
 
     layout(location=0) in vec3 a_Position;
@@ -70,7 +74,7 @@ Sandbox2D::Sandbox2D()
     }
     )";
 
-    std::string fragmentSrc = R"(
+    std::string multiColorFragmentSrc = R"(
     #version 330 core
 
     
@@ -83,9 +87,45 @@ Sandbox2D::Sandbox2D()
         
     }
     )";
+    m_MultiColorShader = std::shared_ptr<Ganymede::Shader>(Ganymede::Shader::Create(multiColorVertexSrc, multiColorFragmentSrc));
+
+    // ============================== Flat Color Shader ===================================
     
-    m_Shader = std::shared_ptr<Ganymede::Shader>(Ganymede::Shader::Create(vertexSrc, fragmentSrc));
+    std::string flatVertexSrc = R"(
+    #version 330 core
+
+    layout(location=0) in vec3 a_Position;
+    // layout(location=1) in vec4 a_Color;
+
+    uniform mat4 u_ViewProjection;
+    uniform mat4 u_Transform;
     
+    out vec3 v_Position;
+    // out vec4 v_Color;
+    
+    void main(){
+        v_Position = a_Position;
+        // v_Color = a_Color;
+        gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+    }
+    )";
+
+    std::string flatFragmentSrc = R"(
+    #version 330 core
+
+    
+    layout(location=0) out vec4 o_Color;
+    in vec3 v_Position;
+    // in vec4 v_Color;
+    uniform vec4 u_Color;
+    
+    void main(){
+        o_Color = u_Color;
+        
+    }
+    )";
+    
+    m_FlatColorShader = std::shared_ptr<Ganymede::Shader>(Ganymede::Shader::Create(flatVertexSrc, flatFragmentSrc));
 }
 
 void Sandbox2D::OnAttach() {
@@ -136,6 +176,9 @@ void Sandbox2D::OnUpdate() {
     mousePos.y *= -1;
 
     glm::mat4 squareTransform = glm::translate(glm::mat4(0.1f), m_SquarePosition);
+    // Set flat color based on UI-picked color
+    m_FlatColorShader->Bind();
+    std::dynamic_pointer_cast<Ganymede::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_FlatColor);
     
     m_Camera.SetPosition({m_CameraPosition + mousePos, 0.f});
     m_Camera.SetRotation(mousePos.x * 30.0f);
@@ -145,8 +188,8 @@ void Sandbox2D::OnUpdate() {
     Ganymede::Renderer::BeginScene(m_Camera);
 
     // Render square and triangle with the same shader
-    Ganymede::Renderer::Submit(m_Shader, m_SquareVertexArray, squareTransform);
-    Ganymede::Renderer::Submit(m_Shader, m_TriangleVertexArray);
+    Ganymede::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, squareTransform);
+    Ganymede::Renderer::Submit(m_MultiColorShader, m_TriangleVertexArray);
 
     Ganymede::Renderer::EndScene();
     // Renderer::Flush();
@@ -155,7 +198,9 @@ void Sandbox2D::OnUpdate() {
 }
 
 void Sandbox2D::OnImGuiRender() {
-    Layer::OnImGuiRender();
+    ImGui::Begin("Settings");
+    ImGui::ColorEdit4("Square color", glm::value_ptr(m_FlatColor));
+    ImGui::End();
 }
 
 void Sandbox2D::OnEvent(Ganymede::Event& event) {
