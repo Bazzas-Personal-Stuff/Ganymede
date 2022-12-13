@@ -26,11 +26,11 @@ Sandbox2D::Sandbox2D()
         0, 1, 2
     };
 
-    m_TriangleVertexArray = std::shared_ptr<Ganymede::VertexArray>(Ganymede::VertexArray::Create());
+    m_TriangleVertexArray = Ganymede::Ref<Ganymede::VertexArray>(Ganymede::VertexArray::Create());
 
-    std::shared_ptr<Ganymede::VertexBuffer> triangleVertBuffer = std::shared_ptr<Ganymede::VertexBuffer>(Ganymede::VertexBuffer::Create(vertices, sizeof(vertices)));
+    auto triangleVertBuffer = Ganymede::Ref<Ganymede::VertexBuffer>(Ganymede::VertexBuffer::Create(vertices, sizeof(vertices)));
     triangleVertBuffer->SetLayout(layout);
-    std::shared_ptr<Ganymede::IndexBuffer> triangleIndexBuffer = std::shared_ptr<Ganymede::IndexBuffer>(Ganymede::IndexBuffer::Create(indices, (uint32_t)std::size(indices)));
+    auto triangleIndexBuffer = Ganymede::Ref<Ganymede::IndexBuffer>(Ganymede::IndexBuffer::Create(indices, (uint32_t)std::size(indices)));
     m_TriangleVertexArray->AddVertexBuffer(triangleVertBuffer);
     m_TriangleVertexArray->SetIndexBuffer(triangleIndexBuffer);
 
@@ -46,11 +46,11 @@ Sandbox2D::Sandbox2D()
         2, 3, 0,
     };
 
-    m_SquareVertexArray = std::shared_ptr<Ganymede::VertexArray>(Ganymede::VertexArray::Create());
+    m_SquareVertexArray = Ganymede::Ref<Ganymede::VertexArray>(Ganymede::VertexArray::Create());
 
-    std::shared_ptr<Ganymede::VertexBuffer> squareVertBuffer = std::shared_ptr<Ganymede::VertexBuffer>(Ganymede::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+    auto squareVertBuffer = Ganymede::Ref<Ganymede::VertexBuffer>(Ganymede::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
     squareVertBuffer->SetLayout(layout); // using same layout, same shader as triangle
-    std::shared_ptr<Ganymede::IndexBuffer> squareIndexBuffer = std::shared_ptr<Ganymede::IndexBuffer>(Ganymede::IndexBuffer::Create(squareIndices, (uint32_t)std::size(squareIndices)));
+    auto squareIndexBuffer = Ganymede::Ref<Ganymede::IndexBuffer>(Ganymede::IndexBuffer::Create(squareIndices, (uint32_t)std::size(squareIndices)));
     m_SquareVertexArray->AddVertexBuffer(squareVertBuffer);
     m_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
 
@@ -87,7 +87,7 @@ Sandbox2D::Sandbox2D()
         
     }
     )";
-    m_MultiColorShader = std::shared_ptr<Ganymede::Shader>(Ganymede::Shader::Create(multiColorVertexSrc, multiColorFragmentSrc));
+    m_MultiColorShader = Ganymede::Ref<Ganymede::Shader>(Ganymede::Shader::Create(multiColorVertexSrc, multiColorFragmentSrc));
 
     // ============================== Flat Color Shader ===================================
     
@@ -125,7 +125,7 @@ Sandbox2D::Sandbox2D()
     }
     )";
     
-    m_FlatColorShader = std::shared_ptr<Ganymede::Shader>(Ganymede::Shader::Create(flatVertexSrc, flatFragmentSrc));
+    m_FlatColorShader = Ganymede::Ref<Ganymede::Shader>(Ganymede::Shader::Create(flatVertexSrc, flatFragmentSrc));
 }
 
 void Sandbox2D::OnAttach() {

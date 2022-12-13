@@ -7,14 +7,23 @@
     <Filter Include="src\Ganymede">
       <UniqueIdentifier>{E6E6A266-D249-320B-7BCF-6AC16711FE8D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Ganymede\Core">
+      <UniqueIdentifier>{FE4A5E7A-6A61-5C10-B3D8-E7311F2E2D98}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Ganymede\Events">
       <UniqueIdentifier>{0A143F90-7675-1C9E-FFE2-62506B43535D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Ganymede\ImGui">
       <UniqueIdentifier>{907092C6-7C54-531C-E5B4-4D6FD1B73D9E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Ganymede\Renderer">
+      <UniqueIdentifier>{4C4D4F93-B8B9-0A8E-81AD-A2EBEDD82CF6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
@@ -50,6 +59,12 @@
     </ClInclude>
     <ClInclude Include="src\Ganymede\Core.h">
       <Filter>src\Ganymede</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\Time.h">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\Timestep.h">
+      <Filter>src\Ganymede\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Ganymede\EntryPoint.h">
       <Filter>src\Ganymede</Filter>
@@ -87,8 +102,47 @@
     <ClInclude Include="src\Ganymede\MouseButtonCodes.h">
       <Filter>src\Ganymede</Filter>
     </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\Buffer.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\GraphicsContext.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\OrthographicCamera.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\RenderCommand.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\Renderer.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\RendererAPI.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\Shader.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\VertexArray.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Ganymede\Window.h">
       <Filter>src\Ganymede</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>src\Platform\Windows</Filter>
@@ -1352,6 +1406,9 @@
     <ClCompile Include="src\Ganymede\Application.cpp">
       <Filter>src\Ganymede</Filter>
     </ClCompile>
+    <ClCompile Include="src\Ganymede\Core\Time.cpp">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\Ganymede\ImGui\ImGuiBuild.cpp">
       <Filter>src\Ganymede\ImGui</Filter>
     </ClCompile>
@@ -1366,6 +1423,42 @@
     </ClCompile>
     <ClCompile Include="src\Ganymede\Log.cpp">
       <Filter>src\Ganymede</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\Buffer.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\RenderCommand.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\Renderer.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\RendererAPI.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\Shader.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\VertexArray.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Platform\Windows</Filter>

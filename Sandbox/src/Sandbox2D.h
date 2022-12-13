@@ -18,10 +18,10 @@ public:
 
 private:
     Ganymede::OrthographicCamera m_Camera;
-    std::shared_ptr<Ganymede::Shader> m_MultiColorShader;
-    std::shared_ptr<Ganymede::Shader> m_FlatColorShader;
-    std::shared_ptr<Ganymede::VertexArray> m_TriangleVertexArray;
-    std::shared_ptr<Ganymede::VertexArray> m_SquareVertexArray;
+    Ganymede::Ref<Ganymede::Shader> m_MultiColorShader;
+    Ganymede::Ref<Ganymede::Shader> m_FlatColorShader;
+    Ganymede::Ref<Ganymede::VertexArray> m_TriangleVertexArray;
+    Ganymede::Ref<Ganymede::VertexArray> m_SquareVertexArray;
 
     glm::vec2 m_CameraPosition {0.0f};
     glm::vec3 m_SquarePosition {0.0f};
