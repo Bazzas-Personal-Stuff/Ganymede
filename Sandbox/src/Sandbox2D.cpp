@@ -194,9 +194,8 @@ void Sandbox2D::OnUpdate() {
     // --------- RENDER ------------
     Ganymede::Renderer::BeginScene(m_Camera);
 
-    // Render square and triangle with the same shader
-    Ganymede::Renderer::Submit(m_TexturedShader, m_SquareVertexArray, squareTransform);
     Ganymede::Renderer::Submit(m_MultiColorShader, m_TriangleVertexArray);
+    Ganymede::Renderer::Submit(m_TexturedShader, m_SquareVertexArray, squareTransform);
 
     Ganymede::Renderer::EndScene();
     // Renderer::Flush();

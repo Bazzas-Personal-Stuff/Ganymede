@@ -2,6 +2,7 @@
 #include "Application.h"
 
 #include "Core/Time.h"
+#include "Renderer/Renderer.h"
 
 namespace Ganymede {
 
@@ -13,6 +14,7 @@ namespace Ganymede {
         m_Window = Window::Create();
         m_Window->SetEventCallback(GNM_BIND_EVENT_FN(Application::OnEvent));
         // m_Window->SetVSync(false);
+        Renderer::Init();
         
         m_ImGuiLayer = new ImGuiLayer();
         PushOverlay(m_ImGuiLayer);
