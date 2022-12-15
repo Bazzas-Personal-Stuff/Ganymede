@@ -21,6 +21,7 @@
 
 #include "Ganymede/Renderer/Buffer.h"
 #include "Ganymede/Renderer/Shader.h"
+#include "Ganymede/Renderer/Texture.h"
 #include "Ganymede/Renderer/VertexArray.h"
 
 #include "Ganymede/Renderer/OrthographicCamera.h"

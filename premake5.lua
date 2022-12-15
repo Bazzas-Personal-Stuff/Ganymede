@@ -15,6 +15,7 @@ IncludeDir["GLFW"] = "Ganymede/vendor/GLFW/include"
 IncludeDir["Glad"] = "Ganymede/vendor/Glad/include"
 IncludeDir["ImGui"] = "Ganymede/vendor/imgui"
 IncludeDir["glm"] = "Ganymede/vendor/glm"
+IncludeDir["stb_image"] = "Ganymede/vendor/stb_image"
 
 -- Premake submodule includes
 group "Dependencies"
@@ -43,6 +44,8 @@ project "Ganymede"
         "%{prj.name}/vendor/glm/glm/**.hpp",
         "%{prj.name}/vendor/glm/glm/**.inl",
         --"%{prj.name}/vendor/glm/glm/**.h",
+        "%{prj.name}/vendor/stb_image/**.h",
+        "%{prj.name}/vendor/stb_image/**.cpp",
     }
 
     defines {
@@ -56,6 +59,7 @@ project "Ganymede"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
+        "%{IncludeDir.stb_image}",
     }
 
     links

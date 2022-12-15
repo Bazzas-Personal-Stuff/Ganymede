@@ -19,13 +19,14 @@ public:
 private:
     Ganymede::OrthographicCamera m_Camera;
     Ganymede::Ref<Ganymede::Shader> m_MultiColorShader;
-    Ganymede::Ref<Ganymede::Shader> m_FlatColorShader;
+    Ganymede::Ref<Ganymede::Shader> m_TexturedShader;
     Ganymede::Ref<Ganymede::VertexArray> m_TriangleVertexArray;
     Ganymede::Ref<Ganymede::VertexArray> m_SquareVertexArray;
+    Ganymede::Ref<Ganymede::Texture2D> m_Texture;
 
     glm::vec2 m_CameraPosition {0.0f};
-    glm::vec3 m_SquarePosition {0.0f};
-    glm::vec4 m_FlatColor {0.8f, 0.2f, 0.2f, 1.0f};
+    glm::vec3 m_SquarePosition {1.0f, 0.0f, 0.0f};
+    glm::vec4 m_FlatColor {1.0f};
     float m_CameraSpeed = 1.0f;
     float m_SquareSpeed = 1.0f;
     

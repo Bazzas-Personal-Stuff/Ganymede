@@ -13,10 +13,6 @@ Sandbox2D::Sandbox2D()
 
     
     // TRIANGLE
-    Ganymede::BufferLayout layout = {
-        { Ganymede::ShaderDataType::Float3, "a_Position"},
-        { Ganymede::ShaderDataType::Float4, "a_Color"},
-    };
     float vertices[3 * 7] = {
         -0.5f,  -0.5f,  0.0f,       1.0f,   0.0f,   1.0f,   1.0f,
         0.5f,   -0.5f,  0.0f,       0.0f,   1.0f,   1.0f,   1.0f,
@@ -29,27 +25,34 @@ Sandbox2D::Sandbox2D()
     m_TriangleVertexArray = Ganymede::Ref<Ganymede::VertexArray>(Ganymede::VertexArray::Create());
 
     auto triangleVertBuffer = Ganymede::Ref<Ganymede::VertexBuffer>(Ganymede::VertexBuffer::Create(vertices, sizeof(vertices)));
-    triangleVertBuffer->SetLayout(layout);
+    triangleVertBuffer->SetLayout({
+        { Ganymede::ShaderDataType::Float3, "a_Position"},
+        { Ganymede::ShaderDataType::Float4, "a_Color"},
+    });
     auto triangleIndexBuffer = Ganymede::Ref<Ganymede::IndexBuffer>(Ganymede::IndexBuffer::Create(indices, (uint32_t)std::size(indices)));
     m_TriangleVertexArray->AddVertexBuffer(triangleVertBuffer);
     m_TriangleVertexArray->SetIndexBuffer(triangleIndexBuffer);
 
     // SQUARE
-    float squareVertices[4*7] ={
-        -0.5f,  -0.5f,  0.0f,       1.0f,   0.0f,   1.0f,   1.0f, 
-         0.5f,  -0.5f,  0.0f,       0.0f,   1.0f,   1.0f,   1.0f, 
-         0.5f,   0.5f,  0.0f,       1.0f,   1.0f,   0.0f,   1.0f, 
-        -0.5f,   0.5f,  0.0f,       1.0f,   1.0f,   1.0f,   1.0f, 
+    float squareVertices[4 * 5] ={
+        -0.5f,  -0.5f,  0.0f,       0.0f,   0.0f,
+         0.5f,  -0.5f,  0.0f,       1.0f,   0.0f,
+         0.5f,   0.5f,  0.0f,       1.0f,   1.0f,
+        -0.5f,   0.5f,  0.0f,       0.0f,   1.0f,
     };
     uint32_t squareIndices[3 * 2] = {
         0, 1, 2,
         2, 3, 0,
     };
 
+
     m_SquareVertexArray = Ganymede::Ref<Ganymede::VertexArray>(Ganymede::VertexArray::Create());
 
     auto squareVertBuffer = Ganymede::Ref<Ganymede::VertexBuffer>(Ganymede::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-    squareVertBuffer->SetLayout(layout); // using same layout, same shader as triangle
+    squareVertBuffer->SetLayout({
+        { Ganymede::ShaderDataType::Float3, "a_Position"},
+        { Ganymede::ShaderDataType::Float2, "a_TexCoord"},
+    }); 
     auto squareIndexBuffer = Ganymede::Ref<Ganymede::IndexBuffer>(Ganymede::IndexBuffer::Create(squareIndices, (uint32_t)std::size(squareIndices)));
     m_SquareVertexArray->AddVertexBuffer(squareVertBuffer);
     m_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
@@ -89,43 +92,45 @@ Sandbox2D::Sandbox2D()
     )";
     m_MultiColorShader = Ganymede::Ref<Ganymede::Shader>(Ganymede::Shader::Create(multiColorVertexSrc, multiColorFragmentSrc));
 
-    // ============================== Flat Color Shader ===================================
+    // ============================== Textured Shader =====================================
     
-    std::string flatVertexSrc = R"(
+    std::string texturedVertexSrc= R"(
     #version 330 core
 
     layout(location=0) in vec3 a_Position;
-    // layout(location=1) in vec4 a_Color;
+    layout(location=1) in vec2 a_TexCoord;
 
     uniform mat4 u_ViewProjection;
     uniform mat4 u_Transform;
     
-    out vec3 v_Position;
-    // out vec4 v_Color;
+    out vec2 v_TexCoord;
     
     void main(){
-        v_Position = a_Position;
-        // v_Color = a_Color;
+        v_TexCoord = a_TexCoord;
         gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
     }
     )";
 
-    std::string flatFragmentSrc = R"(
-    #version 330 core
+     std::string texturedFragmentSrc = R"(
+     #version 330 core
+     
+     layout(location=0) out vec4 o_Color;
 
+     in vec2 v_TexCoord;
+     
+     uniform vec4 u_Color;
+     uniform sampler2D u_Texture;
+     
+     void main(){
+        vec4 texColor = texture(u_Texture, v_TexCoord);
+        o_Color = texColor * u_Color; // Apply tint
+         
+     }
+     )";
     
-    layout(location=0) out vec4 o_Color;
-    in vec3 v_Position;
-    // in vec4 v_Color;
-    uniform vec4 u_Color;
-    
-    void main(){
-        o_Color = u_Color;
-        
-    }
-    )";
-    
-    m_FlatColorShader = Ganymede::Ref<Ganymede::Shader>(Ganymede::Shader::Create(flatVertexSrc, flatFragmentSrc));
+    m_TexturedShader = Ganymede::Ref<Ganymede::Shader>(Ganymede::Shader::Create(texturedVertexSrc, texturedFragmentSrc));
+
+    m_Texture = Ganymede::Texture2D::Create("assets/textures/dude.png");
 }
 
 void Sandbox2D::OnAttach() {
@@ -177,8 +182,10 @@ void Sandbox2D::OnUpdate() {
 
     glm::mat4 squareTransform = glm::translate(glm::mat4(0.1f), m_SquarePosition);
     // Set flat color based on UI-picked color
-    m_FlatColorShader->Bind();
-    std::dynamic_pointer_cast<Ganymede::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_FlatColor);
+    m_TexturedShader->Bind();
+    std::dynamic_pointer_cast<Ganymede::OpenGLShader>(m_TexturedShader)->UploadUniformFloat4("u_Color", m_FlatColor);
+    m_Texture->Bind(0);
+    std::dynamic_pointer_cast<Ganymede::OpenGLShader>(m_TexturedShader)->UploadUniformInt("u_Texture", 0);
     
     m_Camera.SetPosition({m_CameraPosition + mousePos, 0.f});
     m_Camera.SetRotation(mousePos.x * 30.0f);
@@ -188,7 +195,7 @@ void Sandbox2D::OnUpdate() {
     Ganymede::Renderer::BeginScene(m_Camera);
 
     // Render square and triangle with the same shader
-    Ganymede::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, squareTransform);
+    Ganymede::Renderer::Submit(m_TexturedShader, m_SquareVertexArray, squareTransform);
     Ganymede::Renderer::Submit(m_MultiColorShader, m_TriangleVertexArray);
 
     Ganymede::Renderer::EndScene();

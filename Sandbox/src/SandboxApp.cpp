@@ -12,6 +12,6 @@ public:
 };
 
 
-Ganymede::Application* Ganymede::CreateApplication() {
-    return new Sandbox();
+Ganymede::Ref<Ganymede::Application> Ganymede::CreateApplication() {
+    return Ganymede::Ref<Application>(new Sandbox());
 }
