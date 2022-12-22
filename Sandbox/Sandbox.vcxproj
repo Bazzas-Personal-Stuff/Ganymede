@@ -145,6 +145,9 @@
   <ItemGroup>
     <Folder Include="assets\textures" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\shaders\textured.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
