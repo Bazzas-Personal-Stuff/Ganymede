@@ -90,7 +90,7 @@ Sandbox2D::Sandbox2D()
         
     }
     )";
-    m_MultiColorShader = Ganymede::Ref<Ganymede::Shader>(Ganymede::Shader::Create(multiColorVertexSrc, multiColorFragmentSrc));
+    m_MultiColorShader = Ganymede::Ref<Ganymede::Shader>(Ganymede::Shader::Create("VertexColor", multiColorVertexSrc, multiColorFragmentSrc));
 
     // ============================== Textured Shader =====================================
     
@@ -99,8 +99,8 @@ Sandbox2D::Sandbox2D()
     //
     //  std::string texturedFragmentSrc = R"(
     //  )";
-    m_TexturedShader = Ganymede::Shader::Create("assets/shaders/textured.glsl");
-    // m_TexturedShader = Ganymede::Ref<Ganymede::Shader>(Ganymede::Shader::Create(texturedVertexSrc, texturedFragmentSrc));
+    // m_TexturedShader = Ganymede::Shader::Create("assets/shaders/textured.glsl");
+    auto textureShader = m_ShaderLibrary.Load("assets/shaders/textured.glsl");
 
     m_Texture = Ganymede::Texture2D::Create("assets/textures/dude.png");
 }
@@ -154,10 +154,11 @@ void Sandbox2D::OnUpdate() {
 
     glm::mat4 squareTransform = glm::translate(glm::mat4(0.1f), m_SquarePosition);
     // Set flat color based on UI-picked color
-    m_TexturedShader->Bind();
-    std::dynamic_pointer_cast<Ganymede::OpenGLShader>(m_TexturedShader)->UploadUniformFloat4("u_Color", m_FlatColor);
+    auto texturedShader = m_ShaderLibrary.Get("textured");
+    texturedShader->Bind();
+    std::dynamic_pointer_cast<Ganymede::OpenGLShader>(texturedShader)->UploadUniformFloat4("u_Color", m_FlatColor);
     m_Texture->Bind(0);
-    std::dynamic_pointer_cast<Ganymede::OpenGLShader>(m_TexturedShader)->UploadUniformInt("u_Texture", 0);
+    std::dynamic_pointer_cast<Ganymede::OpenGLShader>(texturedShader)->UploadUniformInt("u_Texture", 0);
     
     m_Camera.SetPosition({m_CameraPosition + mousePos, 0.f});
     m_Camera.SetRotation(mousePos.x * 30.0f);
@@ -167,7 +168,7 @@ void Sandbox2D::OnUpdate() {
     Ganymede::Renderer::BeginScene(m_Camera);
 
     Ganymede::Renderer::Submit(m_MultiColorShader, m_TriangleVertexArray);
-    Ganymede::Renderer::Submit(m_TexturedShader, m_SquareVertexArray, squareTransform);
+    Ganymede::Renderer::Submit(texturedShader, m_SquareVertexArray, squareTransform);
 
     Ganymede::Renderer::EndScene();
     // Renderer::Flush();

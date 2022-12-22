@@ -11,9 +11,17 @@ namespace Ganymede {
         std::string fileSource = ReadFile(filepath);
         auto shaderSources = PreProcess(fileSource);
         Compile(shaderSources);
+
+        // Extract name from filepath
+        size_t fileNamePos = filepath.find_last_of("/\\");
+        fileNamePos = fileNamePos == std::string::npos ? 0 : fileNamePos + 1;
+        size_t fileExtPos = filepath.rfind('.');
+        size_t fileNameSize = fileExtPos == std::string::npos ? filepath.size() - fileNamePos : fileExtPos - fileNamePos;
+        m_Name = filepath.substr(fileNamePos, fileNameSize);
     }
 
-    OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc) {
+    OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+        : m_Name(name) {
         std::unordered_map<GLenum, std::string> shaderSources;
         shaderSources[GL_VERTEX_SHADER] = vertexSrc;
         shaderSources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -81,7 +89,9 @@ namespace Ganymede {
     void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources) {
 
         GLuint program = glCreateProgram();
-        std::vector<GLenum> glShaderIDs(shaderSources.size());
+        GNM_CORE_ASSERT(shaderSources.size() <= 2, "Maximum of 2 shaders per file exceeded, attempted to compile {0} shaders.", shaderSources.size())
+        std::array<GLenum, 2> glShaderIDs;
+        int glShaderIDIndex = 0;
         for (auto& kv : shaderSources) {
             GLenum shaderType = kv.first;
             const std::string& shaderSource = kv.second;
@@ -117,7 +127,8 @@ namespace Ganymede {
             }
 
             glAttachShader(program, shader);
-            glShaderIDs.push_back(shader);
+            glShaderIDs[glShaderIDIndex] = shader;
+            glShaderIDIndex++;
         }
 
 

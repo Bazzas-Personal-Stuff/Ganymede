@@ -18,8 +18,9 @@ public:
 
 private:
     Ganymede::OrthographicCamera m_Camera;
+    Ganymede::ShaderLibrary m_ShaderLibrary;
     Ganymede::Ref<Ganymede::Shader> m_MultiColorShader;
-    Ganymede::Ref<Ganymede::Shader> m_TexturedShader;
+    // Ganymede::Ref<Ganymede::Shader> m_TexturedShader;
     Ganymede::Ref<Ganymede::VertexArray> m_TriangleVertexArray;
     Ganymede::Ref<Ganymede::VertexArray> m_SquareVertexArray;
     Ganymede::Ref<Ganymede::Texture2D> m_Texture;
