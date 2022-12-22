@@ -27,7 +27,7 @@ namespace Ganymede {
 
     std::string OpenGLShader::ReadFile(const std::string& filepath) {
         std::string result;
-        std::ifstream inFile(filepath, std::ios::in, std::ios::binary);
+        std::ifstream inFile(filepath, std::ios::in | std::ios::binary);
         if(inFile) {
             inFile.seekg(0, std::ios::end);
             result.resize(inFile.tellg());
@@ -50,14 +50,14 @@ namespace Ganymede {
         size_t pos = shaderSource.find(typeToken);
         while(pos != std::string::npos) {
             // Parse type name, e.g. "#type [typename]"
-            size_t eol = shaderSource.find_first_of('\n', pos);
+            size_t eol = shaderSource.find_first_of("\r\n", pos);
             GNM_CORE_ASSERT(eol != std::string::npos, "Shader syntax error");
             size_t begin = pos + typeTokenLength + 1;
             std::string shaderType = shaderSource.substr(begin, eol - begin);
             GNM_CORE_ASSERT(shaderType == "vertex" || shaderType == "fragment" || shaderType == "pixel", "Invalid shader type '{0}'", shaderType);
 
             // Get source code until next #type or eof
-            size_t nextLinePos = shaderSource.find_first_not_of('\n', eol);
+            size_t nextLinePos = shaderSource.find_first_not_of("\r\n", eol);
             pos = shaderSource.find(typeToken, nextLinePos);
             splitSources[ShaderTypeFromString(shaderType)] = shaderSource.substr(nextLinePos, pos - (
                 nextLinePos == std::string::npos ? shaderSource.size() - 1 : nextLinePos));
