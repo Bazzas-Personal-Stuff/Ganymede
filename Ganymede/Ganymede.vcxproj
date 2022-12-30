@@ -157,6 +157,7 @@
     <ClInclude Include="src\Ganymede\LayerStack.h" />
     <ClInclude Include="src\Ganymede\Log.h" />
     <ClInclude Include="src\Ganymede\MouseButtonCodes.h" />
+    <ClInclude Include="src\Ganymede\OrthographicCameraController.h" />
     <ClInclude Include="src\Ganymede\Renderer\Buffer.h" />
     <ClInclude Include="src\Ganymede\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Ganymede\Renderer\OrthographicCamera.h" />
@@ -602,6 +603,7 @@
     <ClCompile Include="src\Ganymede\Layer.cpp" />
     <ClCompile Include="src\Ganymede\LayerStack.cpp" />
     <ClCompile Include="src\Ganymede\Log.cpp" />
+    <ClCompile Include="src\Ganymede\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\RenderCommand.cpp" />

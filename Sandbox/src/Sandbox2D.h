@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <Ganymede.h>
 
+#include "Ganymede/OrthographicCameraController.h"
 #include "Ganymede/Events/KeyEvent.h"
 #include "Ganymede/Events/MouseEvent.h"
 
@@ -17,7 +18,7 @@ public:
     bool OnKeyEvent(Ganymede::KeyEvent& event);
 
 private:
-    Ganymede::OrthographicCamera m_Camera;
+    Ganymede::OrthographicCameraController m_CameraController;
     Ganymede::ShaderLibrary m_ShaderLibrary;
     Ganymede::Ref<Ganymede::Shader> m_MultiColorShader;
     // Ganymede::Ref<Ganymede::Shader> m_TexturedShader;

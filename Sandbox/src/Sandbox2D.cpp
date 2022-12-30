@@ -9,9 +9,8 @@
 
 Sandbox2D::Sandbox2D()
     : Layer("Sandbox2D"),
-    m_Camera(-1.6f, 1.6f, -0.9f, 0.9f) {
+    m_CameraController(16.0f/9.0f){
 
-    
     // TRIANGLE
     float vertices[3 * 7] = {
         -0.5f,  -0.5f,  0.0f,       1.0f,   0.0f,   1.0f,   1.0f,
@@ -114,26 +113,12 @@ void Sandbox2D::OnDetach() {
 }
 
 void Sandbox2D::OnUpdate() {
+    m_CameraController.OnUpdate();
     
     Ganymede::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     Ganymede::RenderCommand::Clear();
 
-    // --------- Camera movement ---
     float deltaTime = Ganymede::Time::Delta();
-    // float deltaTime = 1.0f;
-    
-    if(Ganymede::Input::GetKey(GNM_KEY_W)) {
-        m_CameraPosition.y += deltaTime * m_CameraSpeed;
-    }
-    if(Ganymede::Input::GetKey(GNM_KEY_S)) {
-        m_CameraPosition.y -= deltaTime * m_CameraSpeed;
-    }
-    if(Ganymede::Input::GetKey(GNM_KEY_D)) {
-        m_CameraPosition.x += deltaTime * m_CameraSpeed;
-    }
-    if(Ganymede::Input::GetKey(GNM_KEY_A)) {
-        m_CameraPosition.x -= deltaTime * m_CameraSpeed;
-    }
 
     // --------- Square movement ---
     if(Ganymede::Input::GetKey(GNM_KEY_E)) {
@@ -144,13 +129,13 @@ void Sandbox2D::OnUpdate() {
     }
 
     // mouse
-    float width = (float)Ganymede::Application::Get().GetWindow().GetWidth();
-    float height = (float)Ganymede::Application::Get().GetWindow().GetHeight();
-
-    glm::vec2 mousePos = Ganymede::Input::GetMousePosition();
-    mousePos -= glm::vec2({width/2.f, height/2.f});
-    mousePos *= 1.0f / height;
-    mousePos.y *= -1;
+    // float width = (float)Ganymede::Application::Get().GetWindow().GetWidth();
+    // float height = (float)Ganymede::Application::Get().GetWindow().GetHeight();
+    //
+    // glm::vec2 mousePos = Ganymede::Input::GetMousePosition();
+    // mousePos -= glm::vec2({width/2.f, height/2.f});
+    // mousePos *= 1.0f / height;
+    // mousePos.y *= -1;
 
     glm::mat4 squareTransform = glm::translate(glm::mat4(0.1f), m_SquarePosition);
     // Set flat color based on UI-picked color
@@ -160,12 +145,10 @@ void Sandbox2D::OnUpdate() {
     m_Texture->Bind(0);
     std::dynamic_pointer_cast<Ganymede::OpenGLShader>(texturedShader)->UploadUniformInt("u_Texture", 0);
     
-    m_Camera.SetPosition({m_CameraPosition + mousePos, 0.f});
-    m_Camera.SetRotation(mousePos.x * 30.0f);
     // -----------------------------
 
     // --------- RENDER ------------
-    Ganymede::Renderer::BeginScene(m_Camera);
+    Ganymede::Renderer::BeginScene(m_CameraController.GetCamera());
 
     Ganymede::Renderer::Submit(m_MultiColorShader, m_TriangleVertexArray);
     Ganymede::Renderer::Submit(texturedShader, m_SquareVertexArray, squareTransform);
@@ -182,8 +165,9 @@ void Sandbox2D::OnImGuiRender() {
     ImGui::End();
 }
 
-void Sandbox2D::OnEvent(Ganymede::Event& event) {
-    Ganymede::EventDispatcher dispatcher(event);
+void Sandbox2D::OnEvent(Ganymede::Event& e) {
+    // Ganymede::EventDispatcher dispatcher(e);
+    m_CameraController.OnEvent(e);        
 }
 
 bool Sandbox2D::OnMouseMovedEvent(Ganymede::MouseMovedEvent& event) {
