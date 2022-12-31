@@ -13,7 +13,7 @@
 #include <string>
 #include <sstream>
 
-#include "Ganymede/Log.h"
+#include "Ganymede/Core/Log.h"
 
 #ifdef GNM_PLATFORM_WINDOWS
     #include <Windows.h>

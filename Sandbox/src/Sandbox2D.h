@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <Ganymede.h>
 
-#include "Ganymede/OrthographicCameraController.h"
+#include "Ganymede/Renderer/OrthographicCameraController.h"
 #include "Ganymede/Events/KeyEvent.h"
 #include "Ganymede/Events/MouseEvent.h"
 

@@ -57,11 +57,32 @@
     <ClInclude Include="src\Ganymede.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ganymede\Application.h">
-      <Filter>src\Ganymede</Filter>
+    <ClInclude Include="src\Ganymede\Core\Application.h">
+      <Filter>src\Ganymede\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ganymede\Core.h">
-      <Filter>src\Ganymede</Filter>
+    <ClInclude Include="src\Ganymede\Core\Core.h">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\EntryPoint.h">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\Input.h">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\KeyCodes.h">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\Layer.h">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\LayerStack.h">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\Log.h">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\MouseButtonCodes.h">
+      <Filter>src\Ganymede\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Ganymede\Core\Time.h">
       <Filter>src\Ganymede\Core</Filter>
@@ -69,8 +90,8 @@
     <ClInclude Include="src\Ganymede\Core\Timestep.h">
       <Filter>src\Ganymede\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ganymede\EntryPoint.h">
-      <Filter>src\Ganymede</Filter>
+    <ClInclude Include="src\Ganymede\Core\Window.h">
+      <Filter>src\Ganymede\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Ganymede\Events\ApplicationEvent.h">
       <Filter>src\Ganymede\Events</Filter>
@@ -87,24 +108,6 @@
     <ClInclude Include="src\Ganymede\ImGui\ImGuiLayer.h">
       <Filter>src\Ganymede\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ganymede\Input.h">
-      <Filter>src\Ganymede</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ganymede\KeyCodes.h">
-      <Filter>src\Ganymede</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ganymede\Layer.h">
-      <Filter>src\Ganymede</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ganymede\LayerStack.h">
-      <Filter>src\Ganymede</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ganymede\Log.h">
-      <Filter>src\Ganymede</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ganymede\MouseButtonCodes.h">
-      <Filter>src\Ganymede</Filter>
-    </ClInclude>
     <ClInclude Include="src\Ganymede\Renderer\Buffer.h">
       <Filter>src\Ganymede\Renderer</Filter>
     </ClInclude>
@@ -112,6 +115,9 @@
       <Filter>src\Ganymede\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Ganymede\Renderer\OrthographicCamera.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\OrthographicCameraController.h">
       <Filter>src\Ganymede\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Ganymede\Renderer\RenderCommand.h">
@@ -131,9 +137,6 @@
     </ClInclude>
     <ClInclude Include="src\Ganymede\Renderer\VertexArray.h">
       <Filter>src\Ganymede\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ganymede\Window.h">
-      <Filter>src\Ganymede</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1415,8 +1418,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Ganymede\Application.cpp">
-      <Filter>src\Ganymede</Filter>
+    <ClCompile Include="src\Ganymede\Core\Application.cpp">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Core\Layer.cpp">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Core\LayerStack.cpp">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Core\Log.cpp">
+      <Filter>src\Ganymede\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Ganymede\Core\Time.cpp">
       <Filter>src\Ganymede\Core</Filter>
@@ -1427,19 +1439,13 @@
     <ClCompile Include="src\Ganymede\ImGui\ImGuiLayer.cpp">
       <Filter>src\Ganymede\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Ganymede\Layer.cpp">
-      <Filter>src\Ganymede</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ganymede\LayerStack.cpp">
-      <Filter>src\Ganymede</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ganymede\Log.cpp">
-      <Filter>src\Ganymede</Filter>
-    </ClCompile>
     <ClCompile Include="src\Ganymede\Renderer\Buffer.cpp">
       <Filter>src\Ganymede\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Ganymede\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\OrthographicCameraController.cpp">
       <Filter>src\Ganymede\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Ganymede\Renderer\RenderCommand.cpp">

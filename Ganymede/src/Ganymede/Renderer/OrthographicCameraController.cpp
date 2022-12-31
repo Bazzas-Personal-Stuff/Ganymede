@@ -1,9 +1,9 @@
 ﻿#include "gnmpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Input.h"
-#include "KeyCodes.h"
-#include "Core/Time.h"
+#include "Ganymede/Core/Input.h"
+#include "Ganymede/Core/KeyCodes.h"
+#include "Ganymede/Core/Time.h"
 
 namespace Ganymede {
     OrthographicCameraController::OrthographicCameraController(float aspectRatio)

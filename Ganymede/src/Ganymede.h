@@ -2,16 +2,16 @@
 
 // For use by Ganymede applications
 
-#include "Ganymede/Application.h"
-#include "Ganymede/Layer.h"
-#include "Ganymede/Log.h"
+#include "Ganymede/Core/Application.h"
+#include "Ganymede/Core/Layer.h"
+#include "Ganymede/Core/Log.h"
 
 #include "Ganymede/Core/Timestep.h"
 #include "Ganymede/Core/Time.h"
 
-#include "Ganymede/Input.h"
-#include "Ganymede/KeyCodes.h"
-#include "Ganymede/MouseButtonCodes.h"
+#include "Ganymede/Core/Input.h"
+#include "Ganymede/Core/KeyCodes.h"
+#include "Ganymede/Core/MouseButtonCodes.h"
 
 #include "Ganymede/ImGui/ImGuiLayer.h"
 

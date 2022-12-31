@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Ganymede/Input.h"
+#include "Ganymede/Core/Input.h"
 
 namespace Ganymede {
     class WindowsInput : public Input {

@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include "Events/ApplicationEvent.h"
-#include "Events/Event.h"
-#include "Events/MouseEvent.h"
-#include "Renderer/OrthographicCamera.h"
+#include "Ganymede/Events/ApplicationEvent.h"
+#include "Ganymede/Events/Event.h"
+#include "Ganymede/Events/MouseEvent.h"
+#include "Ganymede/Renderer/OrthographicCamera.h"
 
 namespace Ganymede {
     class OrthographicCameraController {

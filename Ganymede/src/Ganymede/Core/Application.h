@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include "Core/Timestep.h"
-#include "Ganymede/Core.h"
-#include "Ganymede/Window.h"
+#include "Ganymede/Core/Timestep.h"
+#include "Ganymede/Core/Core.h"
+#include "Ganymede/Core/Window.h"
 
-#include "Ganymede/LayerStack.h"
+#include "Ganymede/Core/LayerStack.h"
 #include "Ganymede/Events/Event.h"
 #include "Ganymede/Events/ApplicationEvent.h"
 #include "Ganymede/ImGui/ImGuiLayer.h"

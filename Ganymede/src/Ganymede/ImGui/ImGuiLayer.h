@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "Ganymede/Core.h"
-#include "Ganymede/Layer.h"
+#include "Ganymede/Core/Core.h"
+#include "Ganymede/Core/Layer.h"
 
 namespace Ganymede {
     class GANYMEDE_API ImGuiLayer : public Layer {

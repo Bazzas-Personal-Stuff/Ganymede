@@ -141,33 +141,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Ganymede.h" />
-    <ClInclude Include="src\Ganymede\Application.h" />
-    <ClInclude Include="src\Ganymede\Core.h" />
+    <ClInclude Include="src\Ganymede\Core\Application.h" />
+    <ClInclude Include="src\Ganymede\Core\Core.h" />
+    <ClInclude Include="src\Ganymede\Core\EntryPoint.h" />
+    <ClInclude Include="src\Ganymede\Core\Input.h" />
+    <ClInclude Include="src\Ganymede\Core\KeyCodes.h" />
+    <ClInclude Include="src\Ganymede\Core\Layer.h" />
+    <ClInclude Include="src\Ganymede\Core\LayerStack.h" />
+    <ClInclude Include="src\Ganymede\Core\Log.h" />
+    <ClInclude Include="src\Ganymede\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\Ganymede\Core\Time.h" />
     <ClInclude Include="src\Ganymede\Core\Timestep.h" />
-    <ClInclude Include="src\Ganymede\EntryPoint.h" />
+    <ClInclude Include="src\Ganymede\Core\Window.h" />
     <ClInclude Include="src\Ganymede\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Ganymede\Events\Event.h" />
     <ClInclude Include="src\Ganymede\Events\KeyEvent.h" />
     <ClInclude Include="src\Ganymede\Events\MouseEvent.h" />
     <ClInclude Include="src\Ganymede\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Ganymede\Input.h" />
-    <ClInclude Include="src\Ganymede\KeyCodes.h" />
-    <ClInclude Include="src\Ganymede\Layer.h" />
-    <ClInclude Include="src\Ganymede\LayerStack.h" />
-    <ClInclude Include="src\Ganymede\Log.h" />
-    <ClInclude Include="src\Ganymede\MouseButtonCodes.h" />
-    <ClInclude Include="src\Ganymede\OrthographicCameraController.h" />
     <ClInclude Include="src\Ganymede\Renderer\Buffer.h" />
     <ClInclude Include="src\Ganymede\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Ganymede\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Ganymede\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Ganymede\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Ganymede\Renderer\Renderer.h" />
     <ClInclude Include="src\Ganymede\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Ganymede\Renderer\Shader.h" />
     <ClInclude Include="src\Ganymede\Renderer\Texture.h" />
     <ClInclude Include="src\Ganymede\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Ganymede\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -596,16 +596,16 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Ganymede\Application.cpp" />
+    <ClCompile Include="src\Ganymede\Core\Application.cpp" />
+    <ClCompile Include="src\Ganymede\Core\Layer.cpp" />
+    <ClCompile Include="src\Ganymede\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Ganymede\Core\Log.cpp" />
     <ClCompile Include="src\Ganymede\Core\Time.cpp" />
     <ClCompile Include="src\Ganymede\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Ganymede\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Ganymede\Layer.cpp" />
-    <ClCompile Include="src\Ganymede\LayerStack.cpp" />
-    <ClCompile Include="src\Ganymede\Log.cpp" />
-    <ClCompile Include="src\Ganymede\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Ganymede\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\RendererAPI.cpp" />

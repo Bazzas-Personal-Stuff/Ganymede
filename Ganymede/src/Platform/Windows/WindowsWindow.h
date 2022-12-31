@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Ganymede/Window.h"
+#include "Ganymede/Core/Window.h"
 #include "Ganymede/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>

@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Ganymede/Core.h"
+#include "Ganymede/Core/Core.h"
 #include "Layer.h"
 
 #include <Vector>

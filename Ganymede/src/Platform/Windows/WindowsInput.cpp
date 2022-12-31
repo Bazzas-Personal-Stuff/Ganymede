@@ -1,7 +1,7 @@
 ﻿#include "gnmpch.h"
 #include "WindowsInput.h"
 
-#include "Ganymede/Application.h"
+#include "Ganymede/Core/Application.h"
 
 #include <GLFW/glfw3.h>
 

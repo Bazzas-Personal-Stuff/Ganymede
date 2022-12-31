@@ -1,8 +1,8 @@
 ﻿#include "gnmpch.h"
 #include "Application.h"
 
-#include "Core/Time.h"
-#include "Renderer/Renderer.h"
+#include "Ganymede/Core/Time.h"
+#include "Ganymede/Renderer/Renderer.h"
 
 namespace Ganymede {
 
