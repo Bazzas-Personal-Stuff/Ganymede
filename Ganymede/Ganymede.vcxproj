@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>gnmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GNM_PLATFORM_WINDOWS;GNM_BUILD_DLL;GLFW_INCLUDE_NONE;GNM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GNM_BUILD_DLL;GLFW_INCLUDE_NONE;GNM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -96,7 +96,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>gnmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GNM_PLATFORM_WINDOWS;GNM_BUILD_DLL;GLFW_INCLUDE_NONE;GNM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GNM_BUILD_DLL;GLFW_INCLUDE_NONE;GNM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -120,7 +120,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>gnmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GNM_PLATFORM_WINDOWS;GNM_BUILD_DLL;GLFW_INCLUDE_NONE;GNM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GNM_BUILD_DLL;GLFW_INCLUDE_NONE;GNM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -164,10 +164,12 @@
     <ClInclude Include="src\Ganymede\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Ganymede\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Ganymede\Renderer\Renderer.h" />
+    <ClInclude Include="src\Ganymede\Renderer\Renderer2D.h" />
     <ClInclude Include="src\Ganymede\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Ganymede\Renderer\Shader.h" />
     <ClInclude Include="src\Ganymede\Renderer\Texture.h" />
     <ClInclude Include="src\Ganymede\Renderer\VertexArray.h" />
+    <ClInclude Include="src\Platform\DX11\DX11Context.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -608,10 +610,12 @@
     <ClCompile Include="src\Ganymede\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Ganymede\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\Shader.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\Texture.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\DX11\DX11Context.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />

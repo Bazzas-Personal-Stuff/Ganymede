@@ -25,4 +25,5 @@
 #include "Ganymede/Renderer/VertexArray.h"
 
 #include "Ganymede/Renderer/OrthographicCamera.h"
+#include "Ganymede/Renderer/Renderer2D.h"
 // ---------------------------------------

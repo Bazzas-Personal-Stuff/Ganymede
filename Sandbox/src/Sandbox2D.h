@@ -18,9 +18,10 @@ public:
     bool OnKeyEvent(Ganymede::KeyEvent& event);
 
 private:
+        
     Ganymede::OrthographicCameraController m_CameraController;
     Ganymede::ShaderLibrary m_ShaderLibrary;
-    Ganymede::Ref<Ganymede::Shader> m_MultiColorShader;
+    // Ganymede::Ref<Ganymede::Shader> m_MultiColorShader;
     // Ganymede::Ref<Ganymede::Shader> m_TexturedShader;
     Ganymede::Ref<Ganymede::VertexArray> m_TriangleVertexArray;
     Ganymede::Ref<Ganymede::VertexArray> m_SquareVertexArray;
@@ -29,7 +30,8 @@ private:
     glm::vec2 m_CameraPosition {0.0f};
     glm::vec3 m_SquarePosition {1.0f, 0.0f, 0.0f};
     glm::vec4 m_FlatColor {1.0f};
-    float m_CameraSpeed = 1.0f;
     float m_SquareSpeed = 1.0f;
-    
+
+    // Temp
+    // Ganymede::Ref<Ganymede::Shader> m_Shader;
 };

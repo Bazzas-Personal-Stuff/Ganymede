@@ -11,7 +11,7 @@ namespace Ganymede {
             GNM_CORE_ASSERT(false, "RendererAPI::None is currently not supported")
             return nullptr;
         case RendererAPI::API::OpenGL:
-            return Ref<VertexArray>(new OpenGLVertexArray());
+            return std::make_shared<OpenGLVertexArray>();
         }
 
         GNM_CORE_ASSERT(false, "Invalid Renderer API")

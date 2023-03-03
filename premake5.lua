@@ -74,7 +74,6 @@ project "Ganymede"
         systemversion "latest"
 
         defines {
-            "GNM_PLATFORM_WINDOWS",
             "GNM_BUILD_DLL",
             "GLFW_INCLUDE_NONE",
         }
@@ -130,7 +129,6 @@ project "Sandbox"
         systemversion "latest"
 
         defines {
-            "GNM_PLATFORM_WINDOWS"
         }
 
 

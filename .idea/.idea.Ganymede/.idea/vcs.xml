@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Ganymede/vendor/GLFW" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Ganymede/vendor/glm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Ganymede/vendor/imgui" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Ganymede/vendor/spdlog" vcs="Git" />
   </component>
 </project>
