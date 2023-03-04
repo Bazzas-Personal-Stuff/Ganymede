@@ -1,7 +1,10 @@
 ﻿#pragma once
+#include "glm/vec4.hpp"
 
 namespace Ganymede {
-    class Texture {
+class Texture2D;
+
+class Texture {
     public:
         virtual uint32_t GetWidth() const = 0;
         virtual uint32_t GetHeight() const = 0;
@@ -12,5 +15,6 @@ namespace Ganymede {
     class Texture2D : public Texture {
     public:
         static Ref<Texture2D> Create(const std::string& path);
+        static Ref<Texture2D> Create(const glm::vec4& color);
     };
 }
