@@ -6,7 +6,7 @@
 #include <GLFW/glfw3.h>
 
 namespace Ganymede {
-    Input* Input::s_Instance = new WindowsInput();
+    Scope<Input> Input::s_Instance = CreateScope<WindowsInput>();
 
     bool WindowsInput::GetKeyImpl(int keyCode) {
         auto window = static_cast<GLFWwindow*>( Application::Get().GetWindow().GetNativeWindow());

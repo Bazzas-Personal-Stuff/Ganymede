@@ -6,7 +6,7 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Ganymede {
-    Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
+    Scope<Renderer::SceneData> Renderer::m_SceneData = CreateScope<SceneData>();
 
     void Renderer::Init() {
         RenderCommand::Init();

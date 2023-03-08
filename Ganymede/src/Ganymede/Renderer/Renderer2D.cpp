@@ -104,7 +104,6 @@ namespace Ganymede {
             glm::rotate(glm::mat4(1.0f), rotation, {0.0f, 0.0f, 1.0f}) * 
             glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
 
-        s_Data->Shader->Bind();
         s_Data->Shader->SetMat4("u_Transform", transform);
         s_Data->Shader->SetFloat4("u_Color", color);
         
