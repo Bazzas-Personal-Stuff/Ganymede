@@ -37,6 +37,6 @@ namespace Ganymede {
     };
 
     // To be defined in CLIENT
-    Ref<Application> CreateApplication();
+    Ganymede::Application *CreateApplication();
 
 }

@@ -9,6 +9,7 @@ namespace Ganymede {
     // Create blank texture with no data
     OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
         : m_Width(width), m_Height(height) {
+        GNM_PROFILE_FUNCTION();
         m_InternalFormat = GL_RGBA8;
         m_DataFormat = GL_RGBA;
 
@@ -24,9 +25,15 @@ namespace Ganymede {
 
     // Create texture from specified image asset path
     OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_Path(path) {
+        GNM_PROFILE_FUNCTION();
         int width, height, channels;
         stbi_set_flip_vertically_on_load(1);
-        stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+        stbi_uc* data;
+        {
+            GNM_PROFILE_SCOPE("stbi_load - OpenGLTexture2D::OpenGLTexture2D(const std::string&");
+            data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+        }
+        
         GNM_CORE_ASSERT(data, "Failed to load image at \"{0}\"", path);
         m_Width = width;
         m_Height = height;
@@ -57,6 +64,7 @@ namespace Ganymede {
 
     // Create 1x1 color texture
     OpenGLTexture2D::OpenGLTexture2D(const glm::vec4 &color) {
+        GNM_PROFILE_FUNCTION();
         m_Path = "";
         m_Width = 1;
         m_Height = 1;
@@ -80,10 +88,12 @@ namespace Ganymede {
     }
 
     OpenGLTexture2D::~OpenGLTexture2D() {
+        GNM_PROFILE_FUNCTION();
         glDeleteTextures(1, &m_RendererID);
     }
 
     void OpenGLTexture2D::SetData(void *data, uint32_t size) {
+        GNM_PROFILE_FUNCTION();
         uint32_t bytesPerPixel;
         switch(m_DataFormat) {
         case GL_RGBA:
@@ -101,6 +111,7 @@ namespace Ganymede {
     }
 
     void OpenGLTexture2D::Bind(uint32_t slot) const {
+        GNM_PROFILE_FUNCTION();
         glBindTextureUnit(slot, m_RendererID);
     }
 }

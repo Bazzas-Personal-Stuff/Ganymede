@@ -17,14 +17,18 @@ namespace Ganymede {
     }
 
     WindowsWindow::WindowsWindow(const WindowProps& props) {
+        GNM_PROFILE_FUNCTION();
         WindowsWindow::Init(props);
     }
 
     WindowsWindow::~WindowsWindow() {
+        GNM_PROFILE_FUNCTION();
         WindowsWindow::Shutdown();
     }
 
     void WindowsWindow::Init(const WindowProps& props) {
+        GNM_PROFILE_FUNCTION();
+        
         m_Data.Title = props.Title;
         m_Data.Width = props.Width;
         m_Data.Height = props.Height;
@@ -33,13 +37,18 @@ namespace Ganymede {
 
 
         if(!s_GLFWInitialized) {
+            GNM_PROFILE_SCOPE("glfwInit");
+            
             int success = glfwInit();
             GNM_CORE_ASSERT(success, "Could not initialize GLFW");
             glfwSetErrorCallback(GLFWErrorCallback);
             s_GLFWInitialized = true;
         }
-        
-        m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
+
+        {
+            GNM_PROFILE_SCOPE("glfwCreateWindow");
+            m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
+        }
 
         m_Context = CreateScope<OpenGLContext>(m_Window);
         m_Context->Init();
@@ -136,12 +145,14 @@ namespace Ganymede {
 
 
     void WindowsWindow::Shutdown() {
+        GNM_PROFILE_FUNCTION();
         glfwDestroyWindow(m_Window);
     }
 
     void WindowsWindow::OnUpdate() {
+        GNM_PROFILE_FUNCTION();
         glfwPollEvents();
-        glfwSwapBuffers(m_Window);
+        m_Context->SwapBuffers();
     }
 
     void WindowsWindow::SetVSync(bool enabled) {

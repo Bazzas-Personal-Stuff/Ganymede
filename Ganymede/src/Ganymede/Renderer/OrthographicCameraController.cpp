@@ -13,6 +13,7 @@ namespace Ganymede {
     }
 
     void OrthographicCameraController::OnUpdate() {
+        GNM_PROFILE_FUNCTION();
         // --------- Camera movement ---
 
         glm::vec3 wishDir {0.0f, 0.0f, 0.0f };
@@ -36,12 +37,16 @@ namespace Ganymede {
     }
 
     void OrthographicCameraController::OnEvent(Event& e) {
+        GNM_PROFILE_FUNCTION();
+        
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<MouseScrolledEvent>(GNM_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
         dispatcher.Dispatch<WindowResizeEvent>(GNM_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
     }
 
     bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e) {
+        GNM_PROFILE_FUNCTION();
+        
         m_OrthographicScale -= e.GetOffsetY() * m_ZoomSpeed;
         m_OrthographicScale = std::max(m_OrthographicScale, 0.01f);
         m_Camera.SetProjection(-m_AspectRatio * m_OrthographicScale, m_AspectRatio * m_OrthographicScale, -m_OrthographicScale, m_OrthographicScale );
@@ -49,6 +54,8 @@ namespace Ganymede {
     }
 
     bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e) {
+        GNM_PROFILE_FUNCTION();
+        
         m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
         m_Camera.SetProjection(-m_AspectRatio * m_OrthographicScale, m_AspectRatio * m_OrthographicScale, -m_OrthographicScale, m_OrthographicScale );
         return false;

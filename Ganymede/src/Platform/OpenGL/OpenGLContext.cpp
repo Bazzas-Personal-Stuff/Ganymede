@@ -12,6 +12,8 @@ namespace Ganymede {
     }
 
     void OpenGLContext::Init() {
+        GNM_PROFILE_FUNCTION();
+
         glfwMakeContextCurrent(m_WindowHandle);
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         GNM_CORE_ASSERT(status, "Failed to initialize Glad")
@@ -31,6 +33,7 @@ namespace Ganymede {
     }
 
     void OpenGLContext::SwapBuffers() {
+        GNM_PROFILE_FUNCTION();
         glfwSwapBuffers(m_WindowHandle);
     }
 

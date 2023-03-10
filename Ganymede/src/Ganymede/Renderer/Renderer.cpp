@@ -9,6 +9,7 @@ namespace Ganymede {
     Scope<Renderer::SceneData> Renderer::m_SceneData = CreateScope<SceneData>();
 
     void Renderer::Init() {
+        GNM_PROFILE_FUNCTION();
         RenderCommand::Init();
         Renderer2D::Init();
     }

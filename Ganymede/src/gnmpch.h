@@ -15,6 +15,8 @@
 
 #include "Ganymede/Core/Log.h"
 
+#include "Ganymede/Debug/Profiler.h"
+
 #ifdef GNM_PLATFORM_WINDOWS
     #include <Windows.h>
 #endif

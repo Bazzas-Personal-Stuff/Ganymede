@@ -153,6 +153,7 @@
     <ClInclude Include="src\Ganymede\Core\Time.h" />
     <ClInclude Include="src\Ganymede\Core\Timestep.h" />
     <ClInclude Include="src\Ganymede\Core\Window.h" />
+    <ClInclude Include="src\Ganymede\Debug\Profiler.h" />
     <ClInclude Include="src\Ganymede\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Ganymede\Events\Event.h" />
     <ClInclude Include="src\Ganymede\Events\KeyEvent.h" />

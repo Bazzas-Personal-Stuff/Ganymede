@@ -10,6 +10,9 @@
     <Filter Include="src\Ganymede\Core">
       <UniqueIdentifier>{FE4A5E7A-6A61-5C10-B3D8-E7311F2E2D98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Ganymede\Debug">
+      <UniqueIdentifier>{DC0534C6-C8E9-F41B-314A-EF6E1D4DDF9D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Ganymede\Events">
       <UniqueIdentifier>{0A143F90-7675-1C9E-FFE2-62506B43535D}</UniqueIdentifier>
     </Filter>
@@ -21,6 +24,9 @@
     </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\DX11">
+      <UniqueIdentifier>{0E8DC4D8-7AA3-C26E-C31A-4E902F7093F6}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform\OpenGL">
       <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
@@ -93,6 +99,9 @@
     <ClInclude Include="src\Ganymede\Core\Window.h">
       <Filter>src\Ganymede\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Ganymede\Debug\Profiler.h">
+      <Filter>src\Ganymede\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\Ganymede\Events\ApplicationEvent.h">
       <Filter>src\Ganymede\Events</Filter>
     </ClInclude>
@@ -126,6 +135,9 @@
     <ClInclude Include="src\Ganymede\Renderer\Renderer.h">
       <Filter>src\Ganymede\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Ganymede\Renderer\Renderer2D.h">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Ganymede\Renderer\RendererAPI.h">
       <Filter>src\Ganymede\Renderer</Filter>
     </ClInclude>
@@ -137,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="src\Ganymede\Renderer\VertexArray.h">
       <Filter>src\Ganymede\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\DX11\DX11Context.h">
+      <Filter>src\Platform\DX11</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1454,6 +1469,9 @@
     <ClCompile Include="src\Ganymede\Renderer\Renderer.cpp">
       <Filter>src\Ganymede\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\Renderer2D.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Ganymede\Renderer\RendererAPI.cpp">
       <Filter>src\Ganymede\Renderer</Filter>
     </ClCompile>
@@ -1465,6 +1483,9 @@
     </ClCompile>
     <ClCompile Include="src\Ganymede\Renderer\VertexArray.cpp">
       <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\DX11\DX11Context.cpp">
+      <Filter>src\Platform\DX11</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>

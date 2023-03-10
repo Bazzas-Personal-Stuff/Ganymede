@@ -8,6 +8,7 @@
 
 namespace Ganymede {
     OpenGLShader::OpenGLShader(const std::string& filepath) {
+        GNM_PROFILE_FUNCTION();
         std::string fileSource = ReadFile(filepath);
         auto shaderSources = PreProcess(fileSource);
         Compile(shaderSources);
@@ -22,6 +23,7 @@ namespace Ganymede {
 
     OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
         : m_Name(name) {
+        GNM_PROFILE_FUNCTION();
         std::unordered_map<GLenum, std::string> shaderSources;
         shaderSources[GL_VERTEX_SHADER] = vertexSrc;
         shaderSources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -30,10 +32,12 @@ namespace Ganymede {
 
 
     OpenGLShader::~OpenGLShader() {
+        GNM_PROFILE_FUNCTION();
         glDeleteProgram(m_RendererID);
     }
 
     std::string OpenGLShader::ReadFile(const std::string& filepath) {
+        GNM_PROFILE_FUNCTION();
         std::string result;
         std::ifstream inFile(filepath, std::ios::in | std::ios::binary);
         if(inFile) {
@@ -51,6 +55,7 @@ namespace Ganymede {
     }
 
     std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& shaderSource) {
+        GNM_PROFILE_FUNCTION();
         std::unordered_map<GLenum, std::string> splitSources;
 
         const char* typeToken = "#type";
@@ -75,6 +80,7 @@ namespace Ganymede {
     }
 
     GLenum OpenGLShader::ShaderTypeFromString(const std::string& typeString) {
+        GNM_PROFILE_FUNCTION();
         if(typeString == "vertex") {
             return GL_VERTEX_SHADER;
         }
@@ -88,6 +94,7 @@ namespace Ganymede {
 
     void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources) {
 
+        GNM_PROFILE_FUNCTION();
         GLuint program = glCreateProgram();
         GNM_CORE_ASSERT(shaderSources.size() <= 2, "Maximum of 2 shaders per file exceeded, attempted to compile {0} shaders.", shaderSources.size())
         std::array<GLenum, 2> glShaderIDs;
@@ -168,26 +175,32 @@ namespace Ganymede {
 
 
     void OpenGLShader::Bind() const {
+        GNM_PROFILE_FUNCTION();
         glUseProgram(m_RendererID);
     }
 
     void OpenGLShader::Unbind() const {
+        GNM_PROFILE_FUNCTION();
         glUseProgram(0);
     }
 
     void OpenGLShader::SetInt(const std::string &name, int value) {
+        GNM_PROFILE_FUNCTION();
         UploadUniformInt(name, value);
     }
 
     void OpenGLShader::SetFloat3(const std::string &name, const glm::vec3 &value) {
+        GNM_PROFILE_FUNCTION();
         UploadUniformFloat3(name, value);
     }
 
     void OpenGLShader::SetFloat4(const std::string &name, const glm::vec4 &value) {
+        GNM_PROFILE_FUNCTION();
         UploadUniformFloat4(name, value);
     }
 
     void OpenGLShader::SetMat4(const std::string &name, const glm::mat4 &value) {
+        GNM_PROFILE_FUNCTION();
         UploadUniformMat4(name, value);
     }
 

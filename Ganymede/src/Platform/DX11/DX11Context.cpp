@@ -69,7 +69,7 @@ namespace Ganymede {
                 if(SUCCEEDED(result)) {
                     GNM_CORE_INFO("DirectX11 Info:");
                     GNM_CORE_INFO("  Description: {0}", reinterpret_cast<const char*>(adapterDesc.Description));
-                    GNM_CORE_INFO("  Vendor: {0}", reinterpret_cast<const char*>(adapterDesc.VendorId));
+                    // GNM_CORE_INFO("  Vendor: {0}", reinterpret_cast<const char*>(adapterDesc.VendorId));
                 }
                 pAdapter->Release();
             }

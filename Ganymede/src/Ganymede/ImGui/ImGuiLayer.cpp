@@ -16,6 +16,7 @@ namespace Ganymede {
 
 
     void ImGuiLayer::OnAttach() {
+        GNM_PROFILE_FUNCTION();
 
         // Decide GL+GLSL versions
 #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -76,24 +77,22 @@ namespace Ganymede {
     }
 
     void ImGuiLayer::OnDetach() {
+        GNM_PROFILE_FUNCTION();
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
     }
 
-    void ImGuiLayer::OnImGuiRender() {
-        // static bool show = false;
-        // ImGui::ShowDemoWindow(&show);
-        
-    }
 
     void ImGuiLayer::Begin() {
+        GNM_PROFILE_FUNCTION();
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
     }
 
     void ImGuiLayer::End() {
+        GNM_PROFILE_FUNCTION();
         ImGuiIO& io = ImGui::GetIO();
         Application& app = Application::Get();
         io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());

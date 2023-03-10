@@ -9,6 +9,7 @@ namespace Ganymede {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size) {
+        GNM_PROFILE_FUNCTION();
 
         glCreateBuffers(1, &m_RendererID);
         glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
@@ -16,14 +17,17 @@ namespace Ganymede {
     }
 
     OpenGLVertexBuffer::~OpenGLVertexBuffer() {
+        GNM_PROFILE_FUNCTION();
         glDeleteBuffers(1, &m_RendererID);
     }
 
     void OpenGLVertexBuffer::Bind() const {
+        GNM_PROFILE_FUNCTION();
         glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
     }
 
     void OpenGLVertexBuffer::Unbind() const {
+        GNM_PROFILE_FUNCTION();
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
@@ -32,6 +36,7 @@ namespace Ganymede {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count) : m_Count(count) {
+        GNM_PROFILE_FUNCTION();
         glCreateBuffers(1, &m_RendererID);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
@@ -39,14 +44,17 @@ namespace Ganymede {
     }
 
     OpenGLIndexBuffer::~OpenGLIndexBuffer() {
+        GNM_PROFILE_FUNCTION();
         glDeleteBuffers(1, &m_RendererID);
     }
 
     void OpenGLIndexBuffer::Bind() const {
+        GNM_PROFILE_FUNCTION();
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
     }
 
     void OpenGLIndexBuffer::Unbind() const {
+        GNM_PROFILE_FUNCTION();
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 }

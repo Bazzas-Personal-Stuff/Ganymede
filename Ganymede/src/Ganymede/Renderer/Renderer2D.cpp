@@ -17,6 +17,7 @@ namespace Ganymede {
     static Renderer2DData* s_Data;
 
     void Renderer2D::Init() {
+        GNM_PROFILE_FUNCTION();
         s_Data = new Renderer2DData();
         
         // SQUARE
@@ -50,15 +51,18 @@ namespace Ganymede {
     }
 
     void Renderer2D::Shutdown() {
+        GNM_PROFILE_FUNCTION();
         delete s_Data;
     }
 
     void Renderer2D::BeginScene(const OrthographicCamera &camera) {
+        GNM_PROFILE_FUNCTION();
         s_Data->Shader->Bind();
         s_Data->Shader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
     }
 
     void Renderer2D::EndScene() {
+        GNM_PROFILE_FUNCTION();
     }
 
 
@@ -99,6 +103,7 @@ namespace Ganymede {
     }
 
     void Renderer2D::DrawQuad(const glm::vec3 &position, const float rotation, const glm::vec2 &size, const glm::vec4 &color, const Ref<Texture2D> &texture) {
+        GNM_PROFILE_FUNCTION();
         // Calculate TRS transform matrix
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
             glm::rotate(glm::mat4(1.0f), rotation, {0.0f, 0.0f, 1.0f}) * 
