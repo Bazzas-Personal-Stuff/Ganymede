@@ -1,7 +1,8 @@
 ﻿#pragma once
 
-// For use by Ganymede applications
+#include "Ganymede/Core/Config.h"
 
+// For use by Ganymede applications
 #include "Ganymede/Core/Application.h"
 #include "Ganymede/Core/Layer.h"
 #include "Ganymede/Core/Log.h"

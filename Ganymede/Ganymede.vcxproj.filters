@@ -66,6 +66,9 @@
     <ClInclude Include="src\Ganymede\Core\Application.h">
       <Filter>src\Ganymede\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Ganymede\Core\Config.h">
+      <Filter>src\Ganymede\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Ganymede\Core\Core.h">
       <Filter>src\Ganymede\Core</Filter>
     </ClInclude>
@@ -1455,6 +1458,9 @@
       <Filter>src\Ganymede\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Ganymede\Renderer\Buffer.cpp">
+      <Filter>src\Ganymede\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ganymede\Renderer\GraphicsContext.cpp">
       <Filter>src\Ganymede\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Ganymede\Renderer\OrthographicCamera.cpp">

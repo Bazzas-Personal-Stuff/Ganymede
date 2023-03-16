@@ -88,7 +88,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -112,7 +112,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -136,12 +136,13 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Ganymede.h" />
     <ClInclude Include="src\Ganymede\Core\Application.h" />
+    <ClInclude Include="src\Ganymede\Core\Config.h" />
     <ClInclude Include="src\Ganymede\Core\Core.h" />
     <ClInclude Include="src\Ganymede\Core\EntryPoint.h" />
     <ClInclude Include="src\Ganymede\Core\Input.h" />
@@ -170,7 +171,10 @@
     <ClInclude Include="src\Ganymede\Renderer\Shader.h" />
     <ClInclude Include="src\Ganymede\Renderer\Texture.h" />
     <ClInclude Include="src\Ganymede\Renderer\VertexArray.h" />
+    <ClInclude Include="src\Platform\DX11\DX11Buffer.h" />
     <ClInclude Include="src\Platform\DX11\DX11Context.h" />
+    <ClInclude Include="src\Platform\DX11\DX11RendererAPI.h" />
+    <ClInclude Include="src\Platform\DX11\DX11VertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -607,6 +611,7 @@
     <ClCompile Include="src\Ganymede\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Ganymede\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Ganymede\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\RenderCommand.cpp" />
@@ -616,7 +621,10 @@
     <ClCompile Include="src\Ganymede\Renderer\Shader.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\Texture.cpp" />
     <ClCompile Include="src\Ganymede\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\DX11\DX11Buffer.cpp" />
     <ClCompile Include="src\Platform\DX11\DX11Context.cpp" />
+    <ClCompile Include="src\Platform\DX11\DX11RendererAPI.cpp" />
+    <ClCompile Include="src\Platform\DX11\DX11VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
@@ -634,11 +642,11 @@
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
       <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
     </ProjectReference>
-    <ProjectReference Include="vendor\Glad\Glad.vcxproj">
-      <Project>{BDD6857C-A90D-870D-52FA-6C103E10030F}</Project>
-    </ProjectReference>
     <ProjectReference Include="vendor\imgui\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\Glad\Glad.vcxproj">
+      <Project>{BDD6857C-A90D-870D-52FA-6C103E10030F}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

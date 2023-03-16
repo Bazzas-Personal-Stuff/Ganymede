@@ -2,6 +2,7 @@
 #include "VertexArray.h"
 
 #include "Renderer.h"
+#include "Platform/DX11/DX11VertexArray.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace Ganymede {
@@ -12,6 +13,8 @@ namespace Ganymede {
             return nullptr;
         case RendererAPI::API::OpenGL:
             return CreateRef<OpenGLVertexArray>();
+        case RendererAPI::API::DX11:
+            return CreateRef<DX11VertexArray>();
         }
 
         GNM_CORE_ASSERT(false, "Invalid Renderer API")

@@ -12,6 +12,10 @@ namespace Ganymede {
         Ref<VertexArray> QuadVertexArray;
         Ref<Shader> Shader;
         Ref<Texture2D> WhiteTex;
+
+        glm::vec4 FillColor = {1.0f, 1.0f, 1.0f, 1.0f};
+        // glm::vec4 StrokeColor = {0.0f, 0.0f, 0.0f, 1.0f};
+        // float StrokeWidth = 2.0f;
     };
 
     static Renderer2DData* s_Data;
@@ -65,56 +69,77 @@ namespace Ganymede {
         GNM_PROFILE_FUNCTION();
     }
 
-
-    // Primitives
-    void Renderer2D::DrawQuad(const glm::vec3 &position, const glm::vec2 &size) {
-        DrawQuad(position, 0.0f, size, {1.0f, 1.0f, 1.0f, 1.0f}, s_Data->WhiteTex);
-    }
-
-    void Renderer2D::DrawQuad(const glm::vec3 &position, const glm::vec2 &size, const glm::vec4 &color) {
-        DrawQuad(position, 0.0f, size, color, s_Data->WhiteTex);
-    }
-
-    void Renderer2D::DrawQuad(const glm::vec3 &position, const glm::vec2 &size, const Ref<Texture2D> &texture) {
-        DrawQuad(position, 0.0f, size, {1.0f, 1.0f, 1.0f, 1.0f}, texture);
-    }
-
-    void Renderer2D::DrawQuad(const glm::vec3 &position,
-        const glm::vec2 &size,
-        const glm::vec4 &color,
-        const Ref<Texture2D> &texture) {
-        
-        DrawQuad(position, 0.0f, size, color, texture);
-    }
-
-    void Renderer2D::DrawQuad(const glm::vec3 &position,
-        const float rotation,
-        const glm::vec2 &size,
-        const glm::vec4 &color) {
-
-        DrawQuad(position, rotation, size, color, s_Data->WhiteTex);
-    }
-
-    void Renderer2D::DrawQuad(const glm::vec3 &position,
-        const float rotation,
-        const glm::vec2 &size,
-        const Ref<Texture2D> &texture) {
-        DrawQuad(position, rotation, size, {1.0f, 1.0f, 1.0f, 1.0f}, texture);
-    }
-
-    void Renderer2D::DrawQuad(const glm::vec3 &position, const float rotation, const glm::vec2 &size, const glm::vec4 &color, const Ref<Texture2D> &texture) {
+    // Primitive Modifiers
+    void Renderer2D::Fill(const glm::vec4 &color) {
         GNM_PROFILE_FUNCTION();
+
+        s_Data->FillColor = color;
+    }
+
+    
+    // Primitives
+    void Renderer2D::Rect(const glm::vec3 &position, const glm::vec2 &size, float rotation) {
+        GNM_PROFILE_FUNCTION();
+
         // Calculate TRS transform matrix
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
             glm::rotate(glm::mat4(1.0f), rotation, {0.0f, 0.0f, 1.0f}) * 
             glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
 
         s_Data->Shader->SetMat4("u_Transform", transform);
-        s_Data->Shader->SetFloat4("u_Color", color);
+        s_Data->Shader->SetFloat4("u_Color", s_Data->FillColor);
+        s_Data->WhiteTex->Bind();
+        s_Data->QuadVertexArray->Bind();
+        RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
+        
+    }
+
+    void Renderer2D::Rect(const glm::vec3 &position, const glm::vec2 &size) {
+        GNM_PROFILE_FUNCTION();
+
+        // Calculate TRS transform matrix
+        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+            glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+
+        s_Data->Shader->SetMat4("u_Transform", transform);
+        s_Data->Shader->SetFloat4("u_Color", s_Data->FillColor);
+        s_Data->WhiteTex->Bind();
+        s_Data->QuadVertexArray->Bind();
+        RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
+        
+    }
+
+
+    void Renderer2D::Sprite(const glm::vec3& position, const glm::vec2& size, const SpriteData& spriteData) {
+        GNM_PROFILE_FUNCTION();
+
+        // Calculate TS transform matrix, skip rotation
+        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+            glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+
+        s_Data->Shader->SetMat4("u_Transform", transform);
+        s_Data->Shader->SetFloat4("u_Color", spriteData.Tint);
         
         s_Data->QuadVertexArray->Bind();
-        texture->Bind();
+        spriteData.Texture->Bind();
         RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
     }
+
+    void Renderer2D::Sprite(const glm::vec3& position, const glm::vec2& size, float rotation, const SpriteData& spriteData) {
+        GNM_PROFILE_FUNCTION();
+        
+        // Calculate TRS transform matrix
+        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+            glm::rotate(glm::mat4(1.0f), rotation, {0.0f, 0.0f, 1.0f}) * 
+            glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+
+        s_Data->Shader->SetMat4("u_Transform", transform);
+        s_Data->Shader->SetFloat4("u_Color", spriteData.Tint);
+        
+        s_Data->QuadVertexArray->Bind();
+        spriteData.Texture->Bind();
+        RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
+    }
+
 
 }

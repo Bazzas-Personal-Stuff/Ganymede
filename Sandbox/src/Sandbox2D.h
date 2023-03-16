@@ -26,6 +26,7 @@ private:
     Ganymede::Ref<Ganymede::VertexArray> m_TriangleVertexArray;
     Ganymede::Ref<Ganymede::VertexArray> m_SquareVertexArray;
     Ganymede::Ref<Ganymede::Texture2D> m_Texture;
+    Ganymede::SpriteData m_DudeSprite;
 
     glm::vec2 m_CameraPosition {0.0f};
     glm::vec3 m_SquarePosition {1.0f, 0.0f, 0.0f};

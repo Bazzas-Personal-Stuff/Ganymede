@@ -25,7 +25,7 @@ namespace Ganymede {
         virtual void* GetNativeWindow() const override { return m_Window; }
         
         GLFWwindow* m_Window;
-        Scope<GraphicsContext> m_Context;
+        Ref<GraphicsContext> m_Context;
         
         struct WindowData {
             std::string Title;

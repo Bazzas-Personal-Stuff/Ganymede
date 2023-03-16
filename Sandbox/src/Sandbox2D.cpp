@@ -11,6 +11,8 @@ Sandbox2D::Sandbox2D()
     m_CameraController(16.0f/9.0f){
 
     m_Texture = Ganymede::Texture2D::Create("assets/textures/dude.png");
+    m_DudeSprite = Ganymede::SpriteData();
+    m_DudeSprite.Texture = m_Texture;
 }
 
 void Sandbox2D::OnAttach() {
@@ -39,8 +41,13 @@ void Sandbox2D::OnUpdate() {
     {
         GNM_PROFILE_SCOPE("Renderer Draw");
         Ganymede::Renderer2D::BeginScene(m_CameraController.GetCamera());
-        Ganymede::Renderer2D::DrawQuad({0.0f, 0.0f, 0.0f}, {1.0f, 1.0f}, m_FlatColor);
-        Ganymede::Renderer2D::DrawQuad({0.5f, 0.5f, -0.1f}, {1.0f, 1.0f}, m_FlatColor, m_Texture);
+        Ganymede::Renderer2D::Fill({0.8f, 0.5f, 0.5f, 1.0f});
+        Ganymede::Renderer2D::Rect({0.0f, 0.0f, 0.0f}, {1.0f, 1.0f});
+        Ganymede::Renderer2D::Fill(m_FlatColor);
+        Ganymede::Renderer2D::Rect({0.5f, 0.5f, 0.0f}, {0.5f, 0.5f}, glm::radians(45.0f));
+        Ganymede::Renderer2D::Rect({-0.5f, 0.5f, 0.0f}, {1.0f, 1.0f});
+
+        Ganymede::Renderer2D::Sprite({-1.0f, -1.0f, -0.5f}, {1.0f, 1.0f}, m_DudeSprite);
         Ganymede::Renderer2D::EndScene();
     }
     // -----------------------------

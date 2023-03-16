@@ -5,7 +5,7 @@ workspace "Ganymede"
     configurations {
         "Debug",
         "Release",
-        "Dist"
+        "Dist",
     }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -65,9 +65,10 @@ project "Ganymede"
     links
     {
         "GLFW",
-        "Glad",
         "ImGui",
         "opengl32.lib",
+        "Glad",
+        "d3d11"
     }
 
     filter "system:windows"

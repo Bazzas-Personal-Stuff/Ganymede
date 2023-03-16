@@ -4,6 +4,7 @@
 #include "Ganymede/Events/ApplicationEvent.h"
 #include "Ganymede/Events/KeyEvent.h"
 #include "Ganymede/Events/MouseEvent.h"
+#include "Ganymede/Renderer/RenderCommand.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Ganymede {
@@ -13,6 +14,7 @@ namespace Ganymede {
     }
 
     Scope<Window> Window::Create(const WindowProps& props) {
+        // TODO: Cross-platform
         return Scope<Window>(new WindowsWindow(props));
     }
 
@@ -50,10 +52,8 @@ namespace Ganymede {
             m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
         }
 
-        m_Context = CreateScope<OpenGLContext>(m_Window);
+        m_Context = GraphicsContext::Create(m_Window);
         m_Context->Init();
-
-
         
         glfwSetWindowUserPointer(m_Window, &m_Data);
         SetVSync(true);
@@ -151,8 +151,9 @@ namespace Ganymede {
 
     void WindowsWindow::OnUpdate() {
         GNM_PROFILE_FUNCTION();
+        GraphicsContext::Bind(m_Context);
         glfwPollEvents();
-        m_Context->SwapBuffers();
+        RenderCommand::SwapBuffers();
     }
 
     void WindowsWindow::SetVSync(bool enabled) {
