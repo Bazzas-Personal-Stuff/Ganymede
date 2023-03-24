@@ -4,8 +4,8 @@
 #include "Platform/DX11/DX11RendererAPI.h"
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
-#define GNM_RENDERER_OPENGL 1
-// #define GNM_RENDERER_DIRECTX11 1
+// #define GNM_RENDERER_OPENGL 1
+#define GNM_RENDERER_DIRECTX11 1
 
 namespace Ganymede {
 #if GNM_RENDERER_OPENGL

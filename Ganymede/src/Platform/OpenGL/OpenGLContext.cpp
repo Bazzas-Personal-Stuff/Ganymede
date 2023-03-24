@@ -5,6 +5,7 @@
 #include "GLFW/glfw3.h"
 
 namespace Ganymede {
+    OpenGLContext* OpenGLContext::s_CurrentContext = nullptr;
 
     OpenGLContext::OpenGLContext(GLFWwindow *windowHandle)
         : m_WindowHandle(windowHandle) {

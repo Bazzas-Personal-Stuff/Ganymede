@@ -10,7 +10,7 @@ namespace Ganymede {
         }
 
         static void SwapBuffers() {
-            GraphicsContext::GetCurrent()->SwapBuffers();
+            s_RendererAPI->SwapBuffers();
         }
 
         static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {

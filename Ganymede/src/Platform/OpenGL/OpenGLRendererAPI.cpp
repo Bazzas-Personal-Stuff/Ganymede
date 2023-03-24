@@ -1,6 +1,9 @@
 ﻿#include "gnmpch.h"
 #include "OpenGLRendererAPI.h"
 
+#include "OpenGLContext.h"
+#include "GLFW/glfw3.h"
+
 #include <glad/glad.h>
 
 namespace Ganymede {
@@ -9,6 +12,10 @@ namespace Ganymede {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         
         glEnable(GL_DEPTH_TEST);
+    }
+
+    void OpenGLRendererAPI::SwapBuffers() {
+        OpenGLContext::GetCurrent()->SwapBuffers();
     }
 
     void OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {

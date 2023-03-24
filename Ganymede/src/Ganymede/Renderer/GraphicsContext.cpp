@@ -6,21 +6,25 @@
 #include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Ganymede {
-    Ref<GraphicsContext> GraphicsContext::s_CurrentContext = nullptr;
-
     Ref<GraphicsContext> GraphicsContext::Create(GLFWwindow *windowHandle) {
-        switch(RendererAPI::GetAPI()) {
+        Ref<GraphicsContext> ctxRef = nullptr;
 
+        switch(RendererAPI::GetAPI()) {
         case RendererAPI::API::None:
             GNM_CORE_ASSERT(false, "RendererAPI::None is currently not supported")
             return nullptr;
         case RendererAPI::API::OpenGL:
-            return CreateRef<OpenGLContext>(windowHandle);
+            ctxRef = CreateRef<OpenGLContext>(windowHandle);
+            break;
         case RendererAPI::API::DX11:
-            return CreateRef<DX11Context>(windowHandle);
+            ctxRef = CreateRef<DX11Context>(windowHandle);
+            break;
+
+        default:
+            GNM_CORE_ASSERT(false, "Unknown RendererAPI");
         }
 
-        GNM_CORE_ASSERT(false, "Unknown RendererAPI");
-        return nullptr;
+        ctxRef->Bind();
+        return ctxRef;
     }
 }

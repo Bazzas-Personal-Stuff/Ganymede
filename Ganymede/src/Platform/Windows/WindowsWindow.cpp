@@ -151,7 +151,7 @@ namespace Ganymede {
 
     void WindowsWindow::OnUpdate() {
         GNM_PROFILE_FUNCTION();
-        GraphicsContext::Bind(m_Context);
+        m_Context->Bind();
         glfwPollEvents();
         RenderCommand::SwapBuffers();
     }

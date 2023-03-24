@@ -9,9 +9,11 @@
 #include <wrl.h>
 
 namespace Ganymede {
+    DX11Context* DX11Context::s_CurrentContext = nullptr;
 
     DX11Context::DX11Context(GLFWwindow *windowHandle)
-    : m_WindowHandle(windowHandle){
+    : m_WindowHandle(windowHandle),
+    m_ClearColor(0.0f, 0.0f, 0.0f, 1.0f){
         GNM_CORE_ASSERT(windowHandle, "Window handle is null")
     }
 
@@ -36,9 +38,21 @@ namespace Ganymede {
                 D3D_FEATURE_LEVEL_11_1,
         };
 
+        DXGI_SWAP_CHAIN_DESC swapChainDesc;
+        ZeroMemory(&swapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
+        swapChainDesc.BufferCount = 2;
+        swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+        swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+        swapChainDesc.OutputWindow = m_HWnd;
+        // swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
+        swapChainDesc.SampleDesc.Count = 1;
+        swapChainDesc.Windowed = TRUE;
+
         Microsoft::WRL::ComPtr<ID3D11Device> device;
         Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
-        HRESULT result = D3D11CreateDevice(
+        Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain;
+        
+        HRESULT result = D3D11CreateDeviceAndSwapChain(
             nullptr,
             D3D_DRIVER_TYPE_HARDWARE,
             0,
@@ -46,6 +60,8 @@ namespace Ganymede {
             levels,
             ARRAYSIZE(levels),
             D3D11_SDK_VERSION,
+            &swapChainDesc,
+            &swapChain,
             &device,
             &m_FeatureLevel,
             &context
@@ -55,6 +71,7 @@ namespace Ganymede {
         // cast to dx11.1 versions
         device.As(&m_DX11Device);
         context.As(&m_DX11DeviceContext);
+        swapChain.As(&m_SwapChain);
 
         Microsoft::WRL::ComPtr<IDXGIDevice> dxgiDevice;
         result = device.As(&dxgiDevice);
@@ -80,28 +97,33 @@ namespace Ganymede {
 
         Microsoft::WRL::ComPtr<IDXGIFactory2> dxgiFactory;
         adapter->GetParent(__uuidof(IDXGIFactory2), &dxgiFactory);
+
+        // Create render target
+        Microsoft::WRL::ComPtr<ID3D11Texture2D> backBufferSurface;
+        result = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), &backBufferSurface);
+        GNM_CORE_ASSERT(SUCCEEDED(result), "Failed to get SwapChain backbuffer");
         
-        // Create swapchain
-        DXGI_SWAP_CHAIN_DESC1 swapChainDesc;
-        // swapChainDesc.Width = m_WindowHandle
-        swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        swapChainDesc.BufferCount = 2;
-        swapChainDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
-        swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
-        swapChainDesc.SampleDesc.Count = 1;
-        dxgiFactory->CreateSwapChainForHwnd(
-            device.Get(),
-            m_HWnd,
-            &swapChainDesc,
-            nullptr,
-            nullptr,
-            &m_SwapChain
-            );
+        result = m_DX11Device->CreateRenderTargetView(backBufferSurface.Get(), nullptr, &m_BackBuffer);
+        GNM_CORE_ASSERT(SUCCEEDED(result), "Failed to create render target view");
 
+        // m_DX11DeviceContext->OMSetRenderTargets(1, &m_BackBuffer, nullptr);
 
+        // Set viewport
+        int tempWidth, tempHeight;
+        glfwGetWindowSize(m_WindowHandle, &tempWidth, &tempHeight);
+
+        D3D11_VIEWPORT viewport;
+        ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
+        viewport.TopLeftX = 0;
+        viewport.TopLeftY = 0;
+        viewport.Width = (FLOAT)tempWidth;
+        viewport.Height = (FLOAT)tempHeight;        
+
+        m_DX11DeviceContext->RSSetViewports(1, &viewport);
     }
 
     void DX11Context::SwapBuffers() {
-        m_SwapChain->Present1(1, 0, nullptr);
+        HRESULT result = m_SwapChain->Present(0, 0);
+        GNM_CORE_ASSERT(SUCCEEDED(result), "SwapChain presentation failed");
     }
 }

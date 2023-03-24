@@ -132,10 +132,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Sandbox2D.h" />
+    <ClInclude Include="src\SandboxDX2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Sandbox2D.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
+    <ClCompile Include="src\SandboxDX2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ganymede\Ganymede.vcxproj">
